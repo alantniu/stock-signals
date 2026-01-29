@@ -482,15 +482,29 @@ def generate_dashboard(results: Dict, output_path: str = 'dashboard.html', optio
             </div>
             <div class="header-right">
                 <div class="timestamp">
-                    Last updated: <span id="update-time">{results['generated_at']}</span>
-                    <div class="auto-refresh-note">Auto-refreshes every 5 minutes</div>
+                    <div>Signals: <span id="update-time"></span></div>
+                    <div id="price-status" class="auto-refresh-note">Prices update every 5 minutes</div>
                 </div>
                 <button class="refresh-btn" onclick="refreshPage()">
                     <span class="refresh-icon">🔄</span>
-                    Refresh Now
+                    Refresh Prices
                 </button>
             </div>
         </header>
+        
+        <script>
+            // Set the signals timestamp in Pacific time immediately
+            const signalsTime = '{results['generated_at']}';
+            document.getElementById('update-time').textContent = new Date(signalsTime).toLocaleString('en-US', {{
+                timeZone: 'America/Los_Angeles',
+                month: '2-digit',
+                day: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }}) + ' PT';
+        </script>
         
         <div class="market-banner">
             <div class="market-card regime {regime['regime']}" id="regime-card">
@@ -575,10 +589,11 @@ def generate_dashboard(results: Dict, output_path: str = 'dashboard.html', optio
     </div>
     
     <script>
-        const signals = {signals_json};
+        let signals = {signals_json};
         const regime = {regime_json};
         const summary = {summary_json};
         const optionsData = {options_json};
+        let lastPriceUpdate = null;
         
         function getSignalClass(signal) {{
             return signal.toLowerCase().replace(' ', '-');
@@ -593,30 +608,80 @@ def generate_dashboard(results: Dict, output_path: str = 'dashboard.html', optio
         function scrollToOption(ticker) {{
             const optionCard = document.getElementById('option-' + ticker);
             if (optionCard) {{
-                // Remove highlight from all cards
                 document.querySelectorAll('.option-card').forEach(card => card.classList.remove('highlighted'));
-                
-                // Add highlight to target card
                 optionCard.classList.add('highlighted');
-                
-                // Scroll to the card
                 optionCard.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
-                
-                // Remove highlight after 3 seconds
                 setTimeout(() => {{
                     optionCard.classList.remove('highlighted');
                 }}, 3000);
             }}
         }}
         
-        function refreshPage() {{
+        function formatPacificTime(date) {{
+            return new Date(date).toLocaleString('en-US', {{
+                timeZone: 'America/Los_Angeles',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            }}) + ' PT';
+        }}
+        
+        async function fetchLivePrices() {{
+            const tickers = signals.map(s => s.ticker).join(',');
             const btn = document.querySelector('.refresh-btn');
+            const statusEl = document.getElementById('price-status');
+            
             btn.classList.add('loading');
             btn.disabled = true;
+            if (statusEl) statusEl.textContent = 'Fetching live prices...';
             
-            // Reload the page
-            location.reload();
+            try {{
+                // Use Yahoo Finance API via a CORS proxy
+                const response = await fetch(`https://query1.finance.yahoo.com/v7/finance/quote?symbols=${{tickers}}`, {{
+                    mode: 'cors'
+                }}).catch(() => null);
+                
+                if (response && response.ok) {{
+                    const data = await response.json();
+                    const quotes = data.quoteResponse?.result || [];
+                    
+                    // Update signals with live prices
+                    quotes.forEach(quote => {{
+                        const signal = signals.find(s => s.ticker === quote.symbol);
+                        if (signal && quote.regularMarketPrice) {{
+                            const oldPrice = signal.current_price;
+                            signal.current_price = quote.regularMarketPrice;
+                            signal.daily_change = quote.regularMarketChangePercent || signal.daily_change;
+                        }}
+                    }});
+                    
+                    lastPriceUpdate = new Date();
+                    renderSignals(signals);
+                    if (statusEl) statusEl.textContent = `Prices updated: ${{formatPacificTime(lastPriceUpdate)}}`;
+                }} else {{
+                    // Fallback: just reload the page
+                    if (statusEl) statusEl.textContent = 'Live prices unavailable (CORS). Page reloaded.';
+                    setTimeout(() => location.reload(), 1000);
+                }}
+            }} catch (error) {{
+                console.log('Price fetch error:', error);
+                if (statusEl) statusEl.textContent = 'Could not fetch live prices. Data from last analysis.';
+            }}
+            
+            btn.classList.remove('loading');
+            btn.disabled = false;
         }}
+        
+        function refreshPage() {{
+            fetchLivePrices();
+        }}
+        
+        // Auto-refresh prices every 5 minutes
+        setInterval(fetchLivePrices, 5 * 60 * 1000);
         
         function renderSignals(filteredSignals) {{
             const tbody = document.getElementById('signals-body');
@@ -774,6 +839,9 @@ def generate_dashboard(results: Dict, output_path: str = 'dashboard.html', optio
         // Initial render
         renderSignals(signals);
         renderOptions();
+        
+        // Fetch live prices on page load
+        setTimeout(fetchLivePrices, 1000);
         
         // Check for hash in URL to auto-scroll to option
         if (window.location.hash) {{
