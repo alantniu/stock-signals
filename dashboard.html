@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Signal Dashboard</title>
+    <meta http-equiv="refresh" content="300">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h1 { font-size: 28px; font-weight: 600; }
+        .timestamp { color: #94a3b8; font-size: 14px; }
+        
+        .refresh-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+        
+        .refresh-btn:hover {
+            background: #2563eb;
+        }
+        
+        .refresh-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .refresh-btn.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .refresh-icon {
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .refresh-btn.loading .refresh-icon {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .auto-refresh-note {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .market-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .market-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #334155;
+        }
+        
+        .market-card.regime {
+            border-left: 4px solid;
+        }
+        
+        .market-card.regime.BULLISH { border-left-color: #22c55e; background: linear-gradient(135deg, #1e293b 0%, #14532d33 100%); }
+        .market-card.regime.NEUTRAL { border-left-color: #eab308; background: linear-gradient(135deg, #1e293b 0%, #71380033 100%); }
+        .market-card.regime.BEARISH { border-left-color: #ef4444; background: linear-gradient(135deg, #1e293b 0%, #7f1d1d33 100%); }
+        .market-card.regime.CRASH { border-left-color: #dc2626; background: linear-gradient(135deg, #1e293b 0%, #450a0a33 100%); }
+        
+        .market-label { font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+        .market-value { font-size: 24px; font-weight: 600; margin-top: 5px; }
+        .market-change { font-size: 14px; margin-top: 5px; }
+        .market-change.positive { color: #22c55e; }
+        .market-change.negative { color: #ef4444; }
+        
+        .summary-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+        
+        .summary-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .summary-label {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        
+        .summary-label.strong-buy { background: #14532d; color: #86efac; }
+        .summary-label.buy { background: #166534; color: #bbf7d0; }
+        .summary-label.hold { background: #374151; color: #9ca3af; }
+        .summary-label.sell { background: #991b1b; color: #fecaca; }
+        .summary-label.strong-sell { background: #7f1d1d; color: #fca5a5; }
+        
+        .summary-tickers { font-size: 14px; color: #cbd5e1; }
+        
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover { background: #334155; }
+        .filter-btn.active { background: #3b82f6; border-color: #3b82f6; }
+        
+        .signals-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+        
+        .signals-table th {
+            background: #0f172a;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .signals-table td {
+            padding: 15px;
+            border-bottom: 1px solid #1e293b;
+        }
+        
+        .signals-table tr:hover { background: #334155; }
+        
+        .ticker-cell {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .ticker-link {
+            color: #60a5fa;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .ticker-link:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+        
+        .sector-badge {
+            font-size: 11px;
+            color: #94a3b8;
+            background: #0f172a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        
+        .signal-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .signal-badge.strong-buy { background: #14532d; color: #86efac; }
+        .signal-badge.buy { background: #166534; color: #bbf7d0; }
+        .signal-badge.hold { background: #374151; color: #9ca3af; }
+        .signal-badge.sell { background: #991b1b; color: #fecaca; }
+        .signal-badge.strong-sell { background: #7f1d1d; color: #fca5a5; }
+        
+        .price-cell { font-family: 'SF Mono', Monaco, monospace; }
+        
+        .change-positive { color: #22c55e; }
+        .change-negative { color: #ef4444; }
+        
+        .confidence-bar {
+            width: 60px;
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+        
+        .range-cell {
+            font-size: 13px;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+        
+        .indicators-cell {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        .indicator { margin-right: 12px; white-space: nowrap; }
+        .indicator-label { color: #64748b; }
+        
+        /* Options Section Styles */
+        .options-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+        }
+        
+        .options-section h2 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .options-subtitle {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 15px;
+        }
+        
+        .option-card {
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            padding: 20px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        
+        .option-card:hover {
+            border-color: #3b82f6;
+        }
+        
+        .option-card.highlighted {
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            transform: scale(1.02);
+        }
+        
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .option-ticker {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .option-stock-price {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        
+        .option-signal {
+            text-align: right;
+        }
+        
+        .option-contract {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .option-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .option-field-label {
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .option-field-value {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+        
+        .option-field-value.highlight {
+            color: #22c55e;
+            font-size: 18px;
+        }
+        
+        .option-field-value.negative {
+            color: #ef4444;
+        }
+        
+        .option-field-sub {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        .option-buy-range {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #334155;
+            background: #14532d33;
+            margin: 15px -20px -20px -20px;
+            padding: 15px 20px;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .option-buy-range-label {
+            font-size: 11px;
+            color: #86efac;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        
+        .option-buy-range-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #86efac;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+        
+        .no-options {
+            color: #64748b;
+            font-style: italic;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 12px;
+        }
+        
+        .options-warning {
+            padding: 15px 20px;
+            background: #451a03;
+            color: #fcd34d;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 1200px) {
+            .signals-table { display: block; overflow-x: auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .market-banner { grid-template-columns: 1fr 1fr; }
+            header { flex-direction: column; gap: 10px; text-align: center; }
+            .options-grid { grid-template-columns: 1fr; }
+            .option-contract { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            .option-contract { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>📊 Stock Signal Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="timestamp">
+                    Last updated: <span id="update-time">2026-01-29T04:11:53.026640</span>
+                    <div class="auto-refresh-note">Auto-refreshes every 5 minutes</div>
+                </div>
+                <button class="refresh-btn" onclick="refreshPage()">
+                    <span class="refresh-icon">🔄</span>
+                    Refresh Now
+                </button>
+            </div>
+        </header>
+        
+        <div class="market-banner">
+            <div class="market-card regime BULLISH" id="regime-card">
+                <div class="market-label">Market Regime</div>
+                <div class="market-value" id="regime-value">BULLISH</div>
+                <div class="market-change">Signal modifier: 1.0x</div>
+            </div>
+            <div class="market-card">
+                <div class="market-label">S&P 500 (SPY)</div>
+                <div class="market-value">$695.42</div>
+                <div class="market-change positive">+2.0% vs 50MA</div>
+            </div>
+            <div class="market-card">
+                <div class="market-label">NASDAQ 100 (QQQ)</div>
+                <div class="market-value">$633.22</div>
+                <div class="market-change positive">+2.7% vs 50MA</div>
+            </div>
+            <div class="market-card">
+                <div class="market-label">Volatility (VIX)</div>
+                <div class="market-value">16.35</div>
+                <div class="market-change">Normal</div>
+            </div>
+        </div>
+        
+        <div class="summary-bar">
+            <div class="summary-group">
+                <span class="summary-label strong-buy">🟢🟢 STRONG BUY</span>
+                <span class="summary-tickers">AMZN</span>
+            </div>
+            <div class="summary-group">
+                <span class="summary-label buy">🟢 BUY</span>
+                <span class="summary-tickers">ANET, META, MU, NVDA, STX, WDC, DNA, ASTS, ENPH, FSLR, LEU</span>
+            </div>
+            <div class="summary-group">
+                <span class="summary-label sell">🔴 SELL</span>
+                <span class="summary-tickers">IONQ, RGTI, TSLA, COIN, HOOD, CRSP, RXRX, QS</span>
+            </div>
+            <div class="summary-group">
+                <span class="summary-label strong-sell">🔴🔴 STRONG SELL</span>
+                <span class="summary-tickers">—</span>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterSignals('all')">All (33)</button>
+            <button class="filter-btn" onclick="filterSignals('actionable')">Actionable (20)</button>
+            <button class="filter-btn" onclick="filterSignals('buy')">Buy Signals</button>
+            <button class="filter-btn" onclick="filterSignals('sell')">Sell Signals</button>
+        </div>
+        
+        <table class="signals-table">
+            <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th>Signal</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                    <th>Confidence</th>
+                    <th>Buy Range</th>
+                    <th>Sell Range</th>
+                    <th>Key Indicators</th>
+                </tr>
+            </thead>
+            <tbody id="signals-body">
+            </tbody>
+        </table>
+        
+        <div class="options-section" id="options-section">
+            <h2>📈 LEAPS Call Options - Best Value Picks</h2>
+            <p class="options-subtitle">One optimal CALL option per stock. Click any ticker above to jump to its option. Sorted by potential return.</p>
+            <div class="options-grid" id="options-grid">
+                <!-- Options rendered by JavaScript -->
+            </div>
+            <div class="options-warning">
+                ⚠️ Options can result in 100% loss of premium. These suggestions are based on technical analysis, not financial advice. Always do your own research.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Auto-refreshes every 5 minutes • Not financial advice • Always do your own research</p>
+        </div>
+    </div>
+    
+    <script>
+        const signals = [{"ticker": "AMZN", "sector": "NASDAQ_Tech", "signal": "STRONG BUY", "confidence": 71, "composite_score": 0.51, "current_price": 243.01, "daily_change": -0.68, "buy_range": "$234.76 - $240.26", "sell_range": "$245.76 - $254.01", "support": 224.7, "resistance": 248.94, "indicators": {"rsi": 51.6, "macd_hist": 0.1985, "bb_position": 70.0, "vs_sma50": 4.63, "volume_ratio": 1.02, "stoch_k": 73.1}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": 0.0, "ma": 1.0, "volume": 0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:53.454859"}, {"ticker": "LEU", "sector": "Nuclear", "signal": "BUY", "confidence": 66, "composite_score": 0.465, "current_price": 337.76, "daily_change": 9.17, "buy_range": "$289.26 - $321.59", "sell_range": "$353.93 - $402.43", "support": 239.0, "resistance": 345.6, "indicators": {"rsi": 53.5, "macd_hist": 0.8747, "bb_position": 89.8, "vs_sma50": 24.17, "volume_ratio": 1.42, "stoch_k": 88.9}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": -0.3, "ma": 1.0, "volume": 0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:12:00.034724"}, {"ticker": "ASTS", "sector": "Space", "signal": "BUY", "confidence": 59, "composite_score": 0.39, "current_price": 121.23, "daily_change": 8.88, "buy_range": "$103.84 - $115.43", "sell_range": "$127.03 - $144.41", "support": 69.25, "resistance": 124.32, "indicators": {"rsi": 68.8, "macd_hist": 1.0177, "bb_position": 90.5, "vs_sma50": 52.43, "volume_ratio": 1.04, "stoch_k": 91.8}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": -0.8, "ma": 1.0, "volume": 0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:58.736814"}, {"ticker": "NVDA", "sector": "NASDAQ_Tech", "signal": "BUY", "confidence": 57, "composite_score": 0.37, "current_price": 191.52, "daily_change": 1.59, "buy_range": "$184.23 - $189.09", "sell_range": "$193.95 - $201.24", "support": 177.61, "resistance": 193.63, "indicators": {"rsi": 53.3, "macd_hist": 0.4863, "bb_position": 97.1, "vs_sma50": 4.27, "volume_ratio": 0.93, "stoch_k": 94.4}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": -0.8, "ma": 1.0, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:55.189894"}, {"ticker": "ANET", "sector": "NASDAQ_Tech", "signal": "BUY", "confidence": 56, "composite_score": 0.365, "current_price": 150.15, "daily_change": 2.36, "buy_range": "$139.99 - $146.76", "sell_range": "$153.54 - $163.7", "support": 120.0, "resistance": 151.8, "indicators": {"rsi": 68.3, "macd_hist": 2.4314, "bb_position": 107.7, "vs_sma50": 15.82, "volume_ratio": 1.08, "stoch_k": 94.8}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": -0.8, "ma": 1.0, "volume": 0.1, "stochastic": -0.5}, "timestamp": "2026-01-29T04:11:53.642942"}, {"ticker": "ENPH", "sector": "CleanEnergy", "signal": "BUY", "confidence": 53, "composite_score": 0.332, "current_price": 40.47, "daily_change": 1.35, "buy_range": "$37.26 - $39.4", "sell_range": "$41.54 - $44.75", "support": 31.7, "resistance": 42.63, "indicators": {"rsi": 72.9, "macd_hist": 0.416, "bb_position": 92.4, "vs_sma50": 23.96, "volume_ratio": 0.8, "stoch_k": 75.9}, "individual_scores": {"rsi": -0.191, "macd": 1.0, "bollinger": -0.8, "ma": 1.0, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:59.456997"}, {"ticker": "META", "sector": "NASDAQ_Tech", "signal": "BUY", "confidence": 51, "composite_score": 0.31, "current_price": 668.73, "daily_change": -0.63, "buy_range": "$643.06 - $660.17", "sell_range": "$677.28 - $702.95", "support": 600.0, "resistance": 677.68, "indicators": {"rsi": 57.0, "macd_hist": 4.9472, "bb_position": 77.5, "vs_sma50": 4.03, "volume_ratio": 1.67, "stoch_k": 88.5}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": -0.3, "ma": 0.4, "volume": 0.3, "stochastic": -0.5}, "timestamp": "2026-01-29T04:11:54.508400"}, {"ticker": "MU", "sector": "NASDAQ_Tech", "signal": "BUY", "confidence": 44, "composite_score": 0.249, "current_price": 435.28, "daily_change": 6.1, "buy_range": "$404.75 - $425.1", "sell_range": "$445.46 - $475.99", "support": 284.18, "resistance": 438.94, "indicators": {"rsi": 78.7, "macd_hist": 5.341, "bb_position": 101.4, "vs_sma50": 51.17, "volume_ratio": 1.21, "stoch_k": 96.9}, "individual_scores": {"rsi": -0.578, "macd": 1.0, "bollinger": -0.8, "ma": 1.0, "volume": 0.1, "stochastic": -0.5}, "timestamp": "2026-01-29T04:11:54.789442"}, {"ticker": "FSLR", "sector": "CleanEnergy", "signal": "BUY", "confidence": 44, "composite_score": 0.24, "current_price": 249.41, "daily_change": 6.11, "buy_range": "$233.49 - $244.1", "sell_range": "$254.72 - $270.64", "support": 233.0, "resistance": 280.5, "indicators": {"rsi": 56.7, "macd_hist": 0.0817, "bb_position": 52.4, "vs_sma50": -2.53, "volume_ratio": 0.99, "stoch_k": 84.1}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": 0.0, "ma": 0.0, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:59.635039"}, {"ticker": "DNA", "sector": "Biotech", "signal": "BUY", "confidence": 41, "composite_score": 0.215, "current_price": 9.43, "daily_change": -2.88, "buy_range": "$8.42 - $9.09", "sell_range": "$9.77 - $10.77", "support": 8.08, "resistance": 11.1, "indicators": {"rsi": 48.2, "macd_hist": 0.0294, "bb_position": 51.7, "vs_sma50": 5.18, "volume_ratio": 0.61, "stoch_k": 32.4}, "individual_scores": {"rsi": 0.0, "macd": 0.5, "bollinger": 0.0, "ma": 0.4, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:58.285177"}, {"ticker": "STX", "sector": "NASDAQ_Tech", "signal": "BUY", "confidence": 40, "composite_score": 0.207, "current_price": 442.93, "daily_change": 19.14, "buy_range": "$406.24 - $430.7", "sell_range": "$455.16 - $491.85", "support": 274.27, "resistance": 449.5, "indicators": {"rsi": 83.3, "macd_hist": 9.4677, "bb_position": 126.7, "vs_sma50": 50.54, "volume_ratio": 3.49, "stoch_k": 96.2}, "individual_scores": {"rsi": -0.889, "macd": 1.0, "bollinger": -0.8, "ma": 1.0, "volume": 0.3, "stochastic": -0.5}, "timestamp": "2026-01-29T04:11:56.247903"}, {"ticker": "WDC", "sector": "NASDAQ_Tech", "signal": "BUY", "confidence": 40, "composite_score": 0.205, "current_price": 279.7, "daily_change": 10.7, "buy_range": "$255.32 - $271.57", "sell_range": "$287.83 - $312.21", "support": 171.26, "resistance": 284.0, "indicators": {"rsi": 83.5, "macd_hist": 4.55, "bb_position": 107.2, "vs_sma50": 49.98, "volume_ratio": 1.8, "stoch_k": 95.8}, "individual_scores": {"rsi": -0.899, "macd": 1.0, "bollinger": -0.8, "ma": 1.0, "volume": 0.3, "stochastic": -0.5}, "timestamp": "2026-01-29T04:11:56.826561"}, {"ticker": "AMD", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 39, "composite_score": 0.197, "current_price": 252.74, "daily_change": 0.28, "buy_range": "$236.72 - $247.4", "sell_range": "$258.08 - $274.1", "support": 199.8, "resistance": 266.96, "indicators": {"rsi": 79.2, "macd_hist": 3.6647, "bb_position": 82.9, "vs_sma50": 14.25, "volume_ratio": 0.75, "stoch_k": 78.8}, "individual_scores": {"rsi": -0.613, "macd": 0.5, "bollinger": -0.3, "ma": 1.0, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:53.216495"}, {"ticker": "IRDM", "sector": "Space", "signal": "HOLD", "confidence": 33, "composite_score": 0.135, "current_price": 21.19, "daily_change": -0.05, "buy_range": "$19.62 - $20.67", "sell_range": "$21.71 - $23.28", "support": 17.08, "resistance": 22.18, "indicators": {"rsi": 74.1, "macd_hist": 0.1867, "bb_position": 83.0, "vs_sma50": 18.09, "volume_ratio": 1.09, "stoch_k": 76.3}, "individual_scores": {"rsi": -0.275, "macd": 0.5, "bollinger": -0.3, "ma": 0.4, "volume": 0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:58.958783"}, {"ticker": "RKLB", "sector": "Space", "signal": "HOLD", "confidence": 32, "composite_score": 0.125, "current_price": 88.57, "daily_change": 1.8, "buy_range": "$77.91 - $85.02", "sell_range": "$92.12 - $102.78", "support": 66.85, "resistance": 99.58, "indicators": {"rsi": 55.0, "macd_hist": -1.2427, "bb_position": 63.9, "vs_sma50": 34.17, "volume_ratio": 0.6, "stoch_k": 43.7}, "individual_scores": {"rsi": 0.0, "macd": -0.5, "bollinger": 0.0, "ma": 1.0, "volume": -0.1, "stochastic": 0.2}, "timestamp": "2026-01-29T04:11:59.274830"}, {"ticker": "GOOG", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 27, "composite_score": 0.07, "current_price": 336.28, "daily_change": 0.38, "buy_range": "$324.95 - $332.5", "sell_range": "$340.06 - $351.38", "support": 310.65, "resistance": 341.2, "indicators": {"rsi": 64.7, "macd_hist": -0.0746, "bb_position": 79.3, "vs_sma50": 6.31, "volume_ratio": 0.89, "stoch_k": 77.3}, "individual_scores": {"rsi": 0.0, "macd": -0.5, "bollinger": -0.3, "ma": 1.0, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:53.837652"}, {"ticker": "GOOGL", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 27, "composite_score": 0.07, "current_price": 336.01, "daily_change": 0.44, "buy_range": "$324.59 - $332.2", "sell_range": "$339.82 - $351.24", "support": 310.33, "resistance": 340.49, "indicators": {"rsi": 64.9, "macd_hist": -0.0685, "bb_position": 79.7, "vs_sma50": 6.45, "volume_ratio": 0.93, "stoch_k": 78.8}, "individual_scores": {"rsi": 0.0, "macd": -0.5, "bollinger": -0.3, "ma": 1.0, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:54.019453"}, {"ticker": "SMCI", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 26, "composite_score": 0.065, "current_price": 31.21, "daily_change": 0.03, "buy_range": "$28.74 - $30.39", "sell_range": "$32.03 - $34.51", "support": 27.75, "resistance": 33.64, "indicators": {"rsi": 55.5, "macd_hist": 0.3341, "bb_position": 64.0, "vs_sma50": -2.04, "volume_ratio": 0.76, "stoch_k": 58.7}, "individual_scores": {"rsi": 0.0, "macd": 0.5, "bollinger": 0.0, "ma": -0.2, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:55.801645"}, {"ticker": "ISRG", "sector": "SP500_Broad", "signal": "HOLD", "confidence": 23, "composite_score": 0.035, "current_price": 522.04, "daily_change": -0.57, "buy_range": "$500.28 - $514.79", "sell_range": "$529.29 - $551.06", "support": 518.64, "resistance": 603.88, "indicators": {"rsi": 9.4, "macd_hist": -4.243, "bb_position": 19.9, "vs_sma50": -6.74, "volume_ratio": 0.94, "stoch_k": 4.8}, "individual_scores": {"rsi": 1.0, "macd": -0.5, "bollinger": 0.3, "ma": -0.4, "volume": -0.1, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:57.363242"}, {"ticker": "SNOW", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 22, "composite_score": 0.02, "current_price": 216.0, "daily_change": 1.53, "buy_range": "$204.48 - $212.16", "sell_range": "$219.84 - $231.36", "support": 204.18, "resistance": 236.31, "indicators": {"rsi": 32.8, "macd_hist": 0.8546, "bb_position": 49.9, "vs_sma50": -5.0, "volume_ratio": 1.2, "stoch_k": 36.8}, "individual_scores": {"rsi": 0.0, "macd": 1.0, "bollinger": 0.0, "ma": -1.0, "volume": 0.1, "stochastic": 0.2}, "timestamp": "2026-01-29T04:11:55.980451"}, {"ticker": "SYM", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 27, "composite_score": -0.072, "current_price": 55.1, "daily_change": -6.59, "buy_range": "$49.23 - $53.14", "sell_range": "$57.06 - $62.93", "support": 53.83, "resistance": 73.97, "indicators": {"rsi": 22.2, "macd_hist": -1.3228, "bb_position": -0.2, "vs_sma50": -13.41, "volume_ratio": 2.56, "stoch_k": 6.3}, "individual_scores": {"rsi": 0.517, "macd": -1.0, "bollinger": 0.8, "ma": -0.4, "volume": 0.3, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:56.425706"}, {"ticker": "BEAM", "sector": "Biotech", "signal": "HOLD", "confidence": 29, "composite_score": -0.09, "current_price": 29.02, "daily_change": -5.47, "buy_range": "$24.75 - $27.6", "sell_range": "$30.44 - $34.71", "support": 26.25, "resistance": 36.44, "indicators": {"rsi": 50.2, "macd_hist": -0.3558, "bb_position": 37.1, "vs_sma50": 5.64, "volume_ratio": 1.01, "stoch_k": 18.9}, "individual_scores": {"rsi": 0.0, "macd": -1.0, "bollinger": 0.0, "ma": 0.6, "volume": 0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:57.723286"}, {"ticker": "NET", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 29, "composite_score": -0.095, "current_price": 184.88, "daily_change": -10.23, "buy_range": "$167.7 - $179.15", "sell_range": "$190.61 - $207.79", "support": 168.94, "resistance": 218.22, "indicators": {"rsi": 41.2, "macd_hist": 1.2847, "bb_position": 41.4, "vs_sma50": -5.39, "volume_ratio": 2.36, "stoch_k": 32.3}, "individual_scores": {"rsi": 0.0, "macd": 0.5, "bollinger": 0.0, "ma": -1.0, "volume": 0.3, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:54.967158"}, {"ticker": "PLTR", "sector": "NASDAQ_Tech", "signal": "HOLD", "confidence": 38, "composite_score": -0.184, "current_price": 157.35, "daily_change": -5.04, "buy_range": "$147.57 - $154.09", "sell_range": "$160.61 - $170.39", "support": 157.24, "resistance": 187.28, "indicators": {"rsi": 18.0, "macd_hist": -1.597, "bb_position": -8.2, "vs_sma50": -10.48, "volume_ratio": 1.22, "stoch_k": 0.4}, "individual_scores": {"rsi": 0.803, "macd": -1.0, "bollinger": 0.8, "ma": -1.0, "volume": 0.1, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:55.367973"}, {"ticker": "SOFI", "sector": "SP500_Broad", "signal": "HOLD", "confidence": 39, "composite_score": -0.195, "current_price": 24.6, "daily_change": -3.38, "buy_range": "$23.1 - $24.1", "sell_range": "$25.1 - $26.6", "support": 24.57, "resistance": 29.86, "indicators": {"rsi": 30.4, "macd_hist": -0.1576, "bb_position": 2.7, "vs_sma50": -8.91, "volume_ratio": 1.02, "stoch_k": 0.8}, "individual_scores": {"rsi": 0.0, "macd": -1.0, "bollinger": 0.8, "ma": -0.4, "volume": 0.1, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:57.541813"}, {"ticker": "QS", "sector": "CleanEnergy", "signal": "SELL", "confidence": 41, "composite_score": -0.215, "current_price": 9.93, "daily_change": -2.17, "buy_range": "$8.97 - $9.61", "sell_range": "$10.25 - $11.21", "support": 9.73, "resistance": 11.93, "indicators": {"rsi": 37.8, "macd_hist": -0.0047, "bb_position": 7.8, "vs_sma50": -12.91, "volume_ratio": 0.74, "stoch_k": 9.3}, "individual_scores": {"rsi": 0.0, "macd": -1.0, "bollinger": 0.8, "ma": -0.4, "volume": -0.1, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:59.825318"}, {"ticker": "RXRX", "sector": "Biotech", "signal": "SELL", "confidence": 46, "composite_score": -0.26, "current_price": 4.47, "daily_change": -2.83, "buy_range": "$4.04 - $4.33", "sell_range": "$4.61 - $5.05", "support": 4.05, "resistance": 5.24, "indicators": {"rsi": 41.2, "macd_hist": -0.0099, "bb_position": 38.8, "vs_sma50": 0.08, "volume_ratio": 0.79, "stoch_k": 13.5}, "individual_scores": {"rsi": 0.0, "macd": -1.0, "bollinger": 0.0, "ma": 0.0, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:58.535389"}, {"ticker": "COIN", "sector": "SP500_Broad", "signal": "SELL", "confidence": 46, "composite_score": -0.266, "current_price": 209.43, "daily_change": -0.66, "buy_range": "$194.96 - $204.61", "sell_range": "$214.25 - $228.72", "support": 206.8, "resistance": 263.07, "indicators": {"rsi": 24.1, "macd_hist": -2.3905, "bb_position": 7.4, "vs_sma50": -15.72, "volume_ratio": 1.04, "stoch_k": 4.7}, "individual_scores": {"rsi": 0.395, "macd": -1.0, "bollinger": 0.8, "ma": -1.0, "volume": 0.1, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:57.007362"}, {"ticker": "RGTI", "sector": "NASDAQ_Tech", "signal": "SELL", "confidence": 49, "composite_score": -0.29, "current_price": 22.01, "daily_change": -1.34, "buy_range": "$19.03 - $21.02", "sell_range": "$23.0 - $25.98", "support": 21.4, "resistance": 26.7, "indicators": {"rsi": 37.6, "macd_hist": -0.2015, "bb_position": 10.6, "vs_sma50": -11.18, "volume_ratio": 0.8, "stoch_k": 11.5}, "individual_scores": {"rsi": 0.0, "macd": -1.0, "bollinger": 0.3, "ma": -0.4, "volume": -0.1, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:55.556052"}, {"ticker": "TSLA", "sector": "NASDAQ_Tech", "signal": "SELL", "confidence": 51, "composite_score": -0.315, "current_price": 431.46, "daily_change": 0.13, "buy_range": "$411.83 - $424.92", "sell_range": "$438.0 - $457.64", "support": 417.44, "resistance": 463.12, "indicators": {"rsi": 50.0, "macd_hist": -0.9401, "bb_position": 27.1, "vs_sma50": -2.58, "volume_ratio": 0.88, "stoch_k": 38.0}, "individual_scores": {"rsi": 0.0, "macd": -1.0, "bollinger": 0.3, "ma": -0.4, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:56.611034"}, {"ticker": "IONQ", "sector": "NASDAQ_Tech", "signal": "SELL", "confidence": 53, "composite_score": -0.33, "current_price": 45.8, "daily_change": 0.68, "buy_range": "$39.65 - $43.75", "sell_range": "$47.85 - $54.0", "support": 42.84, "resistance": 54.24, "indicators": {"rsi": 42.2, "macd_hist": -0.4067, "bb_position": 23.6, "vs_sma50": -5.63, "volume_ratio": 0.97, "stoch_k": 26.0}, "individual_scores": {"rsi": 0.0, "macd": -0.5, "bollinger": 0.3, "ma": -1.0, "volume": -0.1, "stochastic": 0.2}, "timestamp": "2026-01-29T04:11:54.318648"}, {"ticker": "HOOD", "sector": "SP500_Broad", "signal": "SELL", "confidence": 53, "composite_score": -0.338, "current_price": 103.4, "daily_change": -1.75, "buy_range": "$96.64 - $101.15", "sell_range": "$105.65 - $112.42", "support": 103.0, "resistance": 124.35, "indicators": {"rsi": 23.9, "macd_hist": -0.7205, "bb_position": 12.6, "vs_sma50": -12.6, "volume_ratio": 1.09, "stoch_k": 2.2}, "individual_scores": {"rsi": 0.41, "macd": -1.0, "bollinger": 0.3, "ma": -1.0, "volume": 0.1, "stochastic": 0.5}, "timestamp": "2026-01-29T04:11:57.185119"}, {"ticker": "CRSP", "sector": "Biotech", "signal": "SELL", "confidence": 56, "composite_score": -0.36, "current_price": 53.69, "daily_change": -1.05, "buy_range": "$49.12 - $52.17", "sell_range": "$55.21 - $59.79", "support": 51.0, "resistance": 60.86, "indicators": {"rsi": 42.0, "macd_hist": -0.101, "bb_position": 32.4, "vs_sma50": -2.23, "volume_ratio": 0.68, "stoch_k": 27.3}, "individual_scores": {"rsi": 0.0, "macd": -1.0, "bollinger": 0.0, "ma": -0.4, "volume": -0.1, "stochastic": 0.0}, "timestamp": "2026-01-29T04:11:57.973895"}];
+        const regime = {"regime": "BULLISH", "details": {"spy_price": 695.42, "spy_vs_50ma": 1.99, "spy_vs_200ma": 9.24, "qqq_price": 633.22, "qqq_vs_50ma": 2.69, "vix": 16.35}, "modifier": 1.0};
+        const summary = {"strong_buy": ["AMZN"], "buy": ["ANET", "META", "MU", "NVDA", "STX", "WDC", "DNA", "ASTS", "ENPH", "FSLR", "LEU"], "hold": ["AMD", "GOOG", "GOOGL", "NET", "PLTR", "SMCI", "SNOW", "SYM", "ISRG", "SOFI", "BEAM", "IRDM", "RKLB"], "sell": ["IONQ", "RGTI", "TSLA", "COIN", "HOOD", "CRSP", "RXRX", "QS"], "strong_sell": []};
+        const optionsData = [{"ticker": "AMD", "current_price": 252.74, "signal": "HOLD", "target_price": 274.1, "recommendation": "$55.0 CALL exp 2027-06-17 \u2192 Target $274.10", "options": [{"strike": 55.0, "bid": 108.95, "ask": 111.35, "mid_price": 110.15, "last_price": 127.0, "volume": 2, "open_interest": 4, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 197.74, "extrinsic": -87.59, "moneyness": 78.2, "moneyness_label": "ITM", "break_even": 165.15, "target_price": 274.1, "return_at_target": 98.9, "max_loss": -100, "leverage": 1.8, "daily_theta_pct": -0.158, "liquidity_score": 0.2, "risk_reward": 0.99, "expiry": "2027-06-17", "days_to_expiry": 503, "option_type": "CALL", "score": 44.7}]}, {"ticker": "AMZN", "current_price": 243.01, "signal": "STRONG BUY", "target_price": 254.01, "recommendation": "$265.0 CALL exp 2026-12-18 \u2192 Target $254.01", "options": [{"strike": 265.0, "bid": 26.05, "ask": 26.35, "mid_price": 26.2, "last_price": 26.3, "volume": 10, "open_interest": 2022, "implied_volatility": 38.2, "delta": 0.45, "intrinsic": 0, "extrinsic": 26.2, "moneyness": -9.0, "moneyness_label": "OTM", "break_even": 291.2, "target_price": 254.01, "return_at_target": -100.0, "max_loss": -100, "leverage": 4.2, "daily_theta_pct": 0.311, "liquidity_score": 21.2, "risk_reward": 0, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 46}]}, {"ticker": "ANET", "current_price": 150.15, "signal": "BUY", "target_price": 163.7, "recommendation": "$160.0 CALL exp 2026-09-18 \u2192 Target $163.70", "options": [{"strike": 160.0, "bid": 21.95, "ask": 23.85, "mid_price": 22.9, "last_price": 22.25, "volume": 703, "open_interest": 504, "implied_volatility": 56.2, "delta": 0.45, "intrinsic": 0, "extrinsic": 22.9, "moneyness": -6.6, "moneyness_label": "OTM", "break_even": 182.9, "target_price": 163.7, "return_at_target": -83.8, "max_loss": -100, "leverage": 3.0, "daily_theta_pct": 0.433, "liquidity_score": 75.3, "risk_reward": 0, "expiry": "2026-09-18", "days_to_expiry": 231, "option_type": "CALL", "score": 36}]}, {"ticker": "GOOG", "current_price": 336.28, "signal": "HOLD", "target_price": 351.38, "recommendation": "$365.0 CALL exp 2026-12-18 \u2192 Target $351.38", "options": [{"strike": 365.0, "bid": 37.05, "ask": 37.9, "mid_price": 37.47, "last_price": 35.08, "volume": 115, "open_interest": 265, "implied_volatility": 38.9, "delta": 0.45, "intrinsic": 0, "extrinsic": 37.47, "moneyness": -8.5, "moneyness_label": "OTM", "break_even": 402.48, "target_price": 351.38, "return_at_target": -100.0, "max_loss": -100, "leverage": 4.0, "daily_theta_pct": 0.311, "liquidity_score": 14.2, "risk_reward": 0, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 44}]}, {"ticker": "GOOGL", "current_price": 336.01, "signal": "HOLD", "target_price": 351.24, "recommendation": "$55.0 CALL exp 2027-06-17 \u2192 Target $351.24", "options": [{"strike": 55.0, "bid": 100.35, "ask": 104.3, "mid_price": 102.32, "last_price": 97.23, "volume": 0, "open_interest": 2, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 281.01, "extrinsic": -178.68, "moneyness": 83.6, "moneyness_label": "ITM", "break_even": 157.32, "target_price": 351.24, "return_at_target": 189.5, "max_loss": -100, "leverage": 2.6, "daily_theta_pct": -0.347, "liquidity_score": 0.0, "risk_reward": 1.9, "expiry": "2027-06-17", "days_to_expiry": 503, "option_type": "CALL", "score": 67.4}]}, {"ticker": "IONQ", "current_price": 45.8, "signal": "SELL", "target_price": 54.0, "recommendation": "$50.0 CALL exp 2027-01-15 \u2192 Target $54.00", "options": [{"strike": 50.0, "bid": 14.05, "ask": 15.2, "mid_price": 14.62, "last_price": 14.6, "volume": 31, "open_interest": 4059, "implied_volatility": 91.7, "delta": 0.45, "intrinsic": 0, "extrinsic": 14.62, "moneyness": -9.2, "moneyness_label": "OTM", "break_even": 64.62, "target_price": 54.0, "return_at_target": -72.6, "max_loss": -100, "leverage": 1.4, "daily_theta_pct": 0.286, "liquidity_score": 43.7, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 33}]}, {"ticker": "META", "current_price": 668.73, "signal": "BUY", "target_price": 702.95, "recommendation": "$725.0 CALL exp 2026-11-20 \u2192 Target $702.95", "options": [{"strike": 725.0, "bid": 74.7, "ask": 75.4, "mid_price": 75.05, "last_price": 76.85, "volume": 15, "open_interest": 44, "implied_volatility": 40.6, "delta": 0.45, "intrinsic": 0, "extrinsic": 75.05, "moneyness": -8.4, "moneyness_label": "OTM", "break_even": 800.05, "target_price": 702.95, "return_at_target": -100.0, "max_loss": -100, "leverage": 4.0, "daily_theta_pct": 0.34, "liquidity_score": 1.9, "risk_reward": 0, "expiry": "2026-11-20", "days_to_expiry": 294, "option_type": "CALL", "score": 43}]}, {"ticker": "MU", "current_price": 435.28, "signal": "BUY", "target_price": 475.99, "recommendation": "$40.0 CALL exp 2026-12-18 \u2192 Target $475.99", "options": [{"strike": 40.0, "bid": 78.6, "ask": 80.85, "mid_price": 79.72, "last_price": 57.82, "volume": 1, "open_interest": 22, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 395.28, "extrinsic": -315.55, "moneyness": 90.8, "moneyness_label": "ITM", "break_even": 119.72, "target_price": 475.99, "return_at_target": 446.9, "max_loss": -100, "leverage": 4.4, "daily_theta_pct": -1.229, "liquidity_score": 0.3, "risk_reward": 4.47, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 80}]}, {"ticker": "NET", "current_price": 184.88, "signal": "HOLD", "target_price": 207.79, "recommendation": "$77.5 CALL exp 2027-01-15 \u2192 Target $207.79", "options": [{"strike": 77.5, "bid": 49.55, "ask": 50.95, "mid_price": 50.25, "last_price": 40.74, "volume": 2, "open_interest": 4, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 107.38, "extrinsic": -57.13, "moneyness": 58.1, "moneyness_label": "ITM", "break_even": 127.75, "target_price": 207.79, "return_at_target": 159.3, "max_loss": -100, "leverage": 2.9, "daily_theta_pct": -0.325, "liquidity_score": 0.2, "risk_reward": 1.59, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 59.8}]}, {"ticker": "NVDA", "current_price": 191.52, "signal": "BUY", "target_price": 201.24, "recommendation": "$210.0 CALL exp 2026-08-21 \u2192 Target $201.24", "options": [{"strike": 210.0, "bid": 19.2, "ask": 19.7, "mid_price": 19.45, "last_price": 19.58, "volume": 52, "open_interest": 4900, "implied_volatility": 46.9, "delta": 0.45, "intrinsic": 0, "extrinsic": 19.45, "moneyness": -9.6, "moneyness_label": "OTM", "break_even": 229.45, "target_price": 201.24, "return_at_target": -100.0, "max_loss": -100, "leverage": 4.4, "daily_theta_pct": 0.493, "liquidity_score": 54.2, "risk_reward": 0, "expiry": "2026-08-21", "days_to_expiry": 203, "option_type": "CALL", "score": 43}]}, {"ticker": "PLTR", "current_price": 157.35, "signal": "HOLD", "target_price": 170.39, "recommendation": "$150.0 CALL exp 2027-01-15 \u2192 Target $170.39", "options": [{"strike": 150.0, "bid": 40.55, "ask": 41.15, "mid_price": 40.85, "last_price": 40.8, "volume": 282, "open_interest": 9667, "implied_volatility": 62.5, "delta": 0.55, "intrinsic": 7.35, "extrinsic": 33.5, "moneyness": 4.7, "moneyness_label": "ITM", "break_even": 190.85, "target_price": 170.39, "return_at_target": -50.1, "max_loss": -100, "leverage": 2.1, "daily_theta_pct": 0.234, "liquidity_score": 100, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 36}]}, {"ticker": "RGTI", "current_price": 22.01, "signal": "SELL", "target_price": 25.98, "recommendation": "$22.0 CALL exp 2027-01-15 \u2192 Target $25.98", "options": [{"strike": 22.0, "bid": 6.8, "ask": 8.75, "mid_price": 7.78, "last_price": 7.81, "volume": 16, "open_interest": 1189, "implied_volatility": 93.3, "delta": 0.55, "intrinsic": 0.01, "extrinsic": 7.76, "moneyness": 0.0, "moneyness_label": "ATM", "break_even": 29.77, "target_price": 25.98, "return_at_target": -48.8, "max_loss": -100, "leverage": 1.6, "daily_theta_pct": 0.285, "liquidity_score": 13.5, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 31}]}, {"ticker": "SMCI", "current_price": 31.21, "signal": "HOLD", "target_price": 34.51, "recommendation": "$30.0 CALL exp 2027-01-15 \u2192 Target $34.51", "options": [{"strike": 30.0, "bid": 9.5, "ask": 10.35, "mid_price": 9.93, "last_price": 9.7, "volume": 35, "open_interest": 4199, "implied_volatility": 79.6, "delta": 0.55, "intrinsic": 1.21, "extrinsic": 8.72, "moneyness": 3.9, "moneyness_label": "ITM", "break_even": 39.92, "target_price": 34.51, "return_at_target": -54.6, "max_loss": -100, "leverage": 1.7, "daily_theta_pct": 0.251, "liquidity_score": 45.5, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 33}]}, {"ticker": "SNOW", "current_price": 216.0, "signal": "HOLD", "target_price": 231.36, "recommendation": "$220.0 CALL exp 2026-12-18 \u2192 Target $231.36", "options": [{"strike": 220.0, "bid": 41.0, "ask": 45.65, "mid_price": 43.33, "last_price": 43.17, "volume": 418, "open_interest": 2048, "implied_volatility": 55.9, "delta": 0.45, "intrinsic": 0, "extrinsic": 43.33, "moneyness": -1.9, "moneyness_label": "ATM", "break_even": 263.32, "target_price": 231.36, "return_at_target": -73.8, "max_loss": -100, "leverage": 2.2, "daily_theta_pct": 0.311, "liquidity_score": 62.3, "risk_reward": 0, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 36}]}, {"ticker": "STX", "current_price": 442.93, "signal": "BUY", "target_price": 491.85, "recommendation": "$45.0 CALL exp 2027-01-15 \u2192 Target $491.85", "options": [{"strike": 45.0, "bid": 96.1, "ask": 99.2, "mid_price": 97.65, "last_price": 72.4, "volume": 1, "open_interest": 18, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 397.93, "extrinsic": -300.28, "moneyness": 89.8, "moneyness_label": "ITM", "break_even": 142.65, "target_price": 491.85, "return_at_target": 357.6, "max_loss": -100, "leverage": 3.6, "daily_theta_pct": -0.879, "liquidity_score": 0.3, "risk_reward": 3.58, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 75}]}, {"ticker": "SYM", "current_price": 55.1, "signal": "HOLD", "target_price": 62.93, "recommendation": "$52.5 CALL exp 2027-01-15 \u2192 Target $62.93", "options": [{"strike": 52.5, "bid": 17.0, "ask": 20.4, "mid_price": 18.7, "last_price": 18.7, "volume": 1, "open_interest": 128, "implied_volatility": 84.8, "delta": 0.55, "intrinsic": 2.6, "extrinsic": 16.1, "moneyness": 4.7, "moneyness_label": "ITM", "break_even": 71.2, "target_price": 62.93, "return_at_target": -44.2, "max_loss": -100, "leverage": 1.6, "daily_theta_pct": 0.246, "liquidity_score": 1.4, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 30}]}, {"ticker": "TSLA", "current_price": 431.46, "signal": "SELL", "target_price": 457.64, "recommendation": "$35.0 CALL exp 2026-12-18 \u2192 Target $457.64", "options": [{"strike": 35.0, "bid": 0, "ask": 0, "mid_price": 205.22, "last_price": 205.22, "volume": 142, "open_interest": 0, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 396.46, "extrinsic": -191.24, "moneyness": 91.9, "moneyness_label": "ITM", "break_even": 240.22, "target_price": 457.64, "return_at_target": 105.9, "max_loss": -100, "leverage": 1.7, "daily_theta_pct": -0.289, "liquidity_score": 14.2, "risk_reward": 1.06, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 47.5}]}, {"ticker": "WDC", "current_price": 279.7, "signal": "BUY", "target_price": 312.21, "recommendation": "$22.5 CALL exp 2026-12-18 \u2192 Target $312.21", "options": [{"strike": 22.5, "bid": 28.05, "ask": 30.9, "mid_price": 29.48, "last_price": 21.1, "volume": 1, "open_interest": 39, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 257.2, "extrinsic": -227.72, "moneyness": 92.0, "moneyness_label": "ITM", "break_even": 51.98, "target_price": 312.21, "return_at_target": 882.9, "max_loss": -100, "leverage": 7.6, "daily_theta_pct": -2.399, "liquidity_score": 0.5, "risk_reward": 8.83, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 80}]}, {"ticker": "COIN", "current_price": 209.43, "signal": "SELL", "target_price": 228.72, "recommendation": "$200.0 CALL exp 2027-01-15 \u2192 Target $228.72", "options": [{"strike": 200.0, "bid": 55.6, "ask": 58.3, "mid_price": 56.95, "last_price": 57.5, "volume": 34, "open_interest": 2361, "implied_volatility": 66.1, "delta": 0.55, "intrinsic": 9.43, "extrinsic": 47.52, "moneyness": 4.5, "moneyness_label": "ITM", "break_even": 256.95, "target_price": 228.72, "return_at_target": -49.6, "max_loss": -100, "leverage": 2.0, "daily_theta_pct": 0.238, "liquidity_score": 27.0, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 34}]}, {"ticker": "HOOD", "current_price": 103.4, "signal": "SELL", "target_price": 112.42, "recommendation": "$100.0 CALL exp 2027-01-15 \u2192 Target $112.42", "options": [{"strike": 100.0, "bid": 27.55, "ask": 28.2, "mid_price": 27.88, "last_price": 27.85, "volume": 156, "open_interest": 11975, "implied_volatility": 66.8, "delta": 0.55, "intrinsic": 3.4, "extrinsic": 24.47, "moneyness": 3.3, "moneyness_label": "ITM", "break_even": 127.88, "target_price": 112.42, "return_at_target": -55.4, "max_loss": -100, "leverage": 2.0, "daily_theta_pct": 0.251, "liquidity_score": 100, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 36}]}, {"ticker": "ISRG", "current_price": 522.04, "signal": "HOLD", "target_price": 551.06, "recommendation": "$560.0 CALL exp 2026-12-18 \u2192 Target $551.06", "options": [{"strike": 560.0, "bid": 51.2, "ask": 57.4, "mid_price": 54.3, "last_price": 56.1, "volume": 5, "open_interest": 123, "implied_volatility": 37.0, "delta": 0.45, "intrinsic": 0, "extrinsic": 54.3, "moneyness": -7.3, "moneyness_label": "OTM", "break_even": 614.3, "target_price": 551.06, "return_at_target": -100.0, "max_loss": -100, "leverage": 4.3, "daily_theta_pct": 0.311, "liquidity_score": 1.7, "risk_reward": 0, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 43}]}, {"ticker": "SOFI", "current_price": 24.6, "signal": "HOLD", "target_price": 26.6, "recommendation": "$25.0 CALL exp 2026-12-18 \u2192 Target $26.60", "options": [{"strike": 25.0, "bid": 5.8, "ask": 5.95, "mid_price": 5.88, "last_price": 5.95, "volume": 611, "open_interest": 4263, "implied_volatility": 66.2, "delta": 0.45, "intrinsic": 0, "extrinsic": 5.88, "moneyness": -1.6, "moneyness_label": "ATM", "break_even": 30.88, "target_price": 26.6, "return_at_target": -72.8, "max_loss": -100, "leverage": 1.9, "daily_theta_pct": 0.311, "liquidity_score": 100, "risk_reward": 0, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 36}]}, {"ticker": "BEAM", "current_price": 29.02, "signal": "HOLD", "target_price": 34.71, "recommendation": "$30.0 CALL exp 2027-01-15 \u2192 Target $34.71", "options": [{"strike": 30.0, "bid": 8.0, "ask": 10.9, "mid_price": 9.45, "last_price": 11.0, "volume": 1, "open_interest": 63, "implied_volatility": 88.6, "delta": 0.45, "intrinsic": 0, "extrinsic": 9.45, "moneyness": -3.4, "moneyness_label": "OTM", "break_even": 39.45, "target_price": 34.71, "return_at_target": -50.2, "max_loss": -100, "leverage": 1.4, "daily_theta_pct": 0.286, "liquidity_score": 0.7, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 30}]}, {"ticker": "CRSP", "current_price": 53.69, "signal": "SELL", "target_price": 59.79, "recommendation": "$55.0 CALL exp 2027-01-15 \u2192 Target $59.79", "options": [{"strike": 55.0, "bid": 10.5, "ask": 14.0, "mid_price": 12.25, "last_price": 13.3, "volume": 4, "open_interest": 521, "implied_volatility": 61.5, "delta": 0.45, "intrinsic": 0, "extrinsic": 12.25, "moneyness": -2.4, "moneyness_label": "OTM", "break_even": 67.25, "target_price": 59.79, "return_at_target": -60.9, "max_loss": -100, "leverage": 2.0, "daily_theta_pct": 0.286, "liquidity_score": 5.6, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 32}]}, {"ticker": "DNA", "current_price": 9.43, "signal": "BUY", "target_price": 10.77, "recommendation": "$10.0 CALL exp 2027-01-15 \u2192 Target $10.77", "options": [{"strike": 10.0, "bid": 2.4, "ask": 4.7, "mid_price": 3.55, "last_price": 4.11, "volume": 1, "open_interest": 165, "implied_volatility": 105.1, "delta": 0.45, "intrinsic": 0, "extrinsic": 3.55, "moneyness": -6.0, "moneyness_label": "OTM", "break_even": 13.55, "target_price": 10.77, "return_at_target": -78.3, "max_loss": -100, "leverage": 1.2, "daily_theta_pct": 0.286, "liquidity_score": 1.8, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 30}]}, {"ticker": "RXRX", "current_price": 4.47, "signal": "SELL", "target_price": 5.05, "recommendation": "$4.5 CALL exp 2027-01-15 \u2192 Target $5.05", "options": [{"strike": 4.5, "bid": 1.6, "ask": 2.0, "mid_price": 1.8, "last_price": 1.65, "volume": 5, "open_interest": 586, "implied_volatility": 108.2, "delta": 0.45, "intrinsic": 0, "extrinsic": 1.8, "moneyness": -0.7, "moneyness_label": "ATM", "break_even": 6.3, "target_price": 5.05, "return_at_target": -69.4, "max_loss": -100, "leverage": 1.1, "daily_theta_pct": 0.286, "liquidity_score": 6.4, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 31}]}, {"ticker": "ASTS", "current_price": 121.23, "signal": "BUY", "target_price": 144.41, "recommendation": "$120.0 CALL exp 2027-01-15 \u2192 Target $144.41", "options": [{"strike": 120.0, "bid": 45.75, "ask": 49.05, "mid_price": 47.4, "last_price": 48.1, "volume": 84, "open_interest": 941, "implied_volatility": 103.3, "delta": 0.55, "intrinsic": 1.23, "extrinsic": 46.17, "moneyness": 1.0, "moneyness_label": "ATM", "break_even": 167.4, "target_price": 144.41, "return_at_target": -48.5, "max_loss": -100, "leverage": 1.4, "daily_theta_pct": 0.278, "liquidity_score": 17.8, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 31}]}, {"ticker": "IRDM", "current_price": 21.19, "signal": "HOLD", "recommendation": "No LEAPS available (options may not be listed)", "options": []}, {"ticker": "RKLB", "current_price": 88.57, "signal": "HOLD", "target_price": 102.78, "recommendation": "$1.0 CALL exp 2026-12-18 \u2192 Target $102.78", "options": [{"strike": 1.0, "bid": 0, "ask": 0, "mid_price": 52.5, "last_price": 52.5, "volume": 9, "open_interest": 15, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 87.57, "extrinsic": -35.07, "moneyness": 98.9, "moneyness_label": "ITM", "break_even": 53.5, "target_price": 102.78, "return_at_target": 93.9, "max_loss": -100, "leverage": 1.3, "daily_theta_pct": -0.207, "liquidity_score": 1.1, "risk_reward": 0.94, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 43.5}]}, {"ticker": "ENPH", "current_price": 40.47, "signal": "BUY", "target_price": 44.75, "recommendation": "$40.0 CALL exp 2027-01-15 \u2192 Target $44.75", "options": [{"strike": 40.0, "bid": 10.45, "ask": 11.9, "mid_price": 11.18, "last_price": 11.0, "volume": 48, "open_interest": 2759, "implied_volatility": 70.8, "delta": 0.55, "intrinsic": 0.47, "extrinsic": 10.71, "moneyness": 1.2, "moneyness_label": "ATM", "break_even": 51.17, "target_price": 44.75, "return_at_target": -57.5, "max_loss": -100, "leverage": 2.0, "daily_theta_pct": 0.274, "liquidity_score": 32.4, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 33}]}, {"ticker": "FSLR", "current_price": 249.41, "signal": "BUY", "target_price": 270.64, "recommendation": "$260.0 CALL exp 2027-01-15 \u2192 Target $270.64", "options": [{"strike": 260.0, "bid": 48.3, "ask": 52.2, "mid_price": 50.25, "last_price": 49.65, "volume": 40, "open_interest": 5022, "implied_volatility": 56.2, "delta": 0.45, "intrinsic": 0, "extrinsic": 50.25, "moneyness": -4.2, "moneyness_label": "OTM", "break_even": 310.25, "target_price": 270.64, "return_at_target": -78.8, "max_loss": -100, "leverage": 2.2, "daily_theta_pct": 0.286, "liquidity_score": 54.2, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 36}]}, {"ticker": "QS", "current_price": 9.93, "signal": "SELL", "target_price": 11.21, "recommendation": "$10.0 CALL exp 2027-01-15 \u2192 Target $11.21", "options": [{"strike": 10.0, "bid": 3.3, "ask": 3.45, "mid_price": 3.38, "last_price": 3.35, "volume": 288, "open_interest": 21270, "implied_volatility": 90.2, "delta": 0.45, "intrinsic": 0, "extrinsic": 3.38, "moneyness": -0.7, "moneyness_label": "ATM", "break_even": 13.38, "target_price": 11.21, "return_at_target": -64.1, "max_loss": -100, "leverage": 1.3, "daily_theta_pct": 0.286, "liquidity_score": 100, "risk_reward": 0, "expiry": "2027-01-15", "days_to_expiry": 350, "option_type": "CALL", "score": 35}]}, {"ticker": "LEU", "current_price": 337.76, "signal": "BUY", "target_price": 402.43, "recommendation": "$115.0 CALL exp 2026-12-18 \u2192 Target $402.43", "options": [{"strike": 115.0, "bid": 157.5, "ask": 161.0, "mid_price": 159.25, "last_price": 338.9, "volume": 0, "open_interest": 3, "implied_volatility": 0.0, "delta": 0.8, "intrinsic": 222.76, "extrinsic": -63.51, "moneyness": 66.0, "moneyness_label": "ITM", "break_even": 274.25, "target_price": 402.43, "return_at_target": 80.5, "max_loss": -100, "leverage": 1.7, "daily_theta_pct": -0.124, "liquidity_score": 0.0, "risk_reward": 0.8, "expiry": "2026-12-18", "days_to_expiry": 322, "option_type": "CALL", "score": 40.1}]}];
+        
+        function getSignalClass(signal) {
+            return signal.toLowerCase().replace(' ', '-');
+        }
+        
+        function getConfidenceColor(confidence) {
+            if (confidence >= 70) return '#22c55e';
+            if (confidence >= 50) return '#eab308';
+            return '#94a3b8';
+        }
+        
+        function scrollToOption(ticker) {
+            const optionCard = document.getElementById('option-' + ticker);
+            if (optionCard) {
+                // Remove highlight from all cards
+                document.querySelectorAll('.option-card').forEach(card => card.classList.remove('highlighted'));
+                
+                // Add highlight to target card
+                optionCard.classList.add('highlighted');
+                
+                // Scroll to the card
+                optionCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                    optionCard.classList.remove('highlighted');
+                }, 3000);
+            }
+        }
+        
+        function refreshPage() {
+            const btn = document.querySelector('.refresh-btn');
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            // Reload the page
+            location.reload();
+        }
+        
+        function renderSignals(filteredSignals) {
+            const tbody = document.getElementById('signals-body');
+            tbody.innerHTML = '';
+            
+            filteredSignals.forEach(signal => {
+                const changeClass = signal.daily_change >= 0 ? 'change-positive' : 'change-negative';
+                const changeSign = signal.daily_change >= 0 ? '+' : '';
+                
+                const row = document.createElement('tr');
+                row.dataset.signal = signal.signal;
+                row.innerHTML = `
+                    <td class="ticker-cell">
+                        <a class="ticker-link" onclick="scrollToOption('${signal.ticker}')">${signal.ticker}</a>
+                        <span class="sector-badge">${signal.sector}</span>
+                    </td>
+                    <td>
+                        <span class="signal-badge ${getSignalClass(signal.signal)}">${signal.signal}</span>
+                    </td>
+                    <td class="price-cell">$${signal.current_price.toFixed(2)}</td>
+                    <td class="${changeClass}">${changeSign}${signal.daily_change.toFixed(2)}%</td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: ${signal.confidence}%; background: ${getConfidenceColor(signal.confidence)};"></div>
+                            </div>
+                            <span>${signal.confidence}%</span>
+                        </div>
+                    </td>
+                    <td class="range-cell">${signal.buy_range}</td>
+                    <td class="range-cell">${signal.sell_range}</td>
+                    <td class="indicators-cell">
+                        <span class="indicator"><span class="indicator-label">RSI:</span> ${signal.indicators.rsi.toFixed(0)}</span>
+                        <span class="indicator"><span class="indicator-label">Vol:</span> ${signal.indicators.volume_ratio.toFixed(1)}x</span>
+                        <span class="indicator"><span class="indicator-label">vs50MA:</span> ${signal.indicators.vs_sma50 >= 0 ? '+' : ''}${signal.indicators.vs_sma50.toFixed(1)}%</span>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        function renderOptions() {
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+            
+            if (!optionsData || optionsData.length === 0) {
+                grid.innerHTML = '<p class="no-options">No options data available. Run with options analysis enabled.</p>';
+                return;
+            }
+            
+            // Sort by return potential
+            const sortedOptions = [...optionsData].filter(s => s.options && s.options.length > 0)
+                .sort((a, b) => {
+                    const returnA = a.options[0]?.return_at_target || 0;
+                    const returnB = b.options[0]?.return_at_target || 0;
+                    return returnB - returnA;
+                });
+            
+            if (sortedOptions.length === 0) {
+                grid.innerHTML = '<p class="no-options">No suitable LEAPS options found for any stocks.</p>';
+                return;
+            }
+            
+            sortedOptions.forEach(stock => {
+                const opt = stock.options[0];
+                const returnClass = opt.return_at_target >= 0 ? 'highlight' : 'negative';
+                
+                // Calculate buy price range (bid to mid)
+                const buyLow = opt.bid > 0 ? opt.bid.toFixed(2) : (opt.mid_price * 0.95).toFixed(2);
+                const buyHigh = opt.mid_price.toFixed(2);
+                
+                const card = document.createElement('div');
+                card.className = 'option-card';
+                card.id = 'option-' + stock.ticker;
+                
+                card.innerHTML = `
+                    <div class="option-header">
+                        <div>
+                            <div class="option-ticker">${stock.ticker}</div>
+                            <div class="option-stock-price">Stock: $${stock.current_price.toFixed(2)} → Target: $${stock.target_price?.toFixed(2) || opt.target_price.toFixed(2)}</div>
+                        </div>
+                        <div class="option-signal">
+                            <span class="signal-badge ${getSignalClass(stock.signal)}">${stock.signal}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="option-contract">
+                        <div class="option-field">
+                            <span class="option-field-label">Strike Price</span>
+                            <span class="option-field-value">$${opt.strike.toFixed(2)}</span>
+                            <span class="option-field-sub">${opt.moneyness_label} (${opt.moneyness > 0 ? '+' : ''}${opt.moneyness.toFixed(1)}%)</span>
+                        </div>
+                        <div class="option-field">
+                            <span class="option-field-label">Expiry</span>
+                            <span class="option-field-value">${opt.expiry}</span>
+                            <span class="option-field-sub">${opt.days_to_expiry} days</span>
+                        </div>
+                        <div class="option-field">
+                            <span class="option-field-label">Potential Return</span>
+                            <span class="option-field-value ${returnClass}">${opt.return_at_target >= 0 ? '+' : ''}${opt.return_at_target.toFixed(0)}%</span>
+                            <span class="option-field-sub">at target price</span>
+                        </div>
+                        <div class="option-field">
+                            <span class="option-field-label">Leverage</span>
+                            <span class="option-field-value">${opt.leverage.toFixed(1)}x</span>
+                            <span class="option-field-sub">IV: ${opt.implied_volatility.toFixed(0)}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="option-buy-range">
+                        <div class="option-buy-range-label">💰 Recommended Buy Range</div>
+                        <div class="option-buy-range-value">$${buyLow} - $${buyHigh} per share</div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            // Add cards for stocks without options
+            const noOptionsStocks = optionsData.filter(s => !s.options || s.options.length === 0);
+            if (noOptionsStocks.length > 0) {
+                const noOptDiv = document.createElement('div');
+                noOptDiv.className = 'option-card';
+                noOptDiv.style.gridColumn = '1 / -1';
+                noOptDiv.innerHTML = `
+                    <p class="no-options">No LEAPS available for: ${noOptionsStocks.map(s => s.ticker).join(', ')}</p>
+                `;
+                grid.appendChild(noOptDiv);
+            }
+        }
+        
+        function filterSignals(filter) {
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            let filtered;
+            switch(filter) {
+                case 'actionable':
+                    filtered = signals.filter(s => s.signal !== 'HOLD');
+                    break;
+                case 'buy':
+                    filtered = signals.filter(s => s.signal.includes('BUY'));
+                    break;
+                case 'sell':
+                    filtered = signals.filter(s => s.signal.includes('SELL'));
+                    break;
+                default:
+                    filtered = signals;
+            }
+            
+            renderSignals(filtered);
+        }
+        
+        // Initial render
+        renderSignals(signals);
+        renderOptions();
+        
+        // Check for hash in URL to auto-scroll to option
+        if (window.location.hash) {
+            const ticker = window.location.hash.substring(1);
+            setTimeout(() => scrollToOption(ticker), 500);
+        }
+    </script>
+</body>
+</html>
