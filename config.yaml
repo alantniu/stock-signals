@@ -1,0 +1,74 @@
+# Stock Signal Generator Configuration
+# =====================================
+
+# Your stock watchlist organized by sector
+watchlist:
+  NASDAQ_Tech:
+    - AMD
+    - AMZN
+    - ANET
+    - GOOG
+    - GOOGL
+    - IONQ
+    - META
+    - MU
+    - NET
+    - NVDA
+    - PLTR
+    - RGTI
+    - SMCI
+    - SNOW
+    - STX
+    - SYM
+    - TSLA
+    - WDC
+
+  SP500_Broad:
+    - COIN
+    - HOOD
+    - ISRG
+    - SOFI
+
+  Biotech:
+    - BEAM
+    - CRSP
+    - DNA
+    - RXRX
+
+  Space:
+    - ASTS
+    - IRDM
+    - RKLB
+
+  CleanEnergy:
+    - ENPH
+    - FSLR
+    - QS
+
+  Nuclear:
+    - LEU
+
+# Signal thresholds
+thresholds:
+  rsi_oversold: 30
+  rsi_overbought: 70
+  macd_threshold: 0.5
+  volume_surge: 1.5
+  bb_squeeze_threshold: 0.05
+  vix_low: 15
+  vix_high: 25
+  vix_extreme: 35
+
+# Alerts disabled for GitHub Actions
+alerts:
+  email:
+    enabled: false
+  sms:
+    enabled: false
+  twilio:
+    enabled: false
+
+# Data settings
+data:
+  lookback_days: 100
+  cache_minutes: 5
