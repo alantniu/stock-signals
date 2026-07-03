@@ -40,7 +40,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:01.271987"
+      "timestamp": "2026-07-03T18:44:46.490144"
     },
     {
       "ticker": "AMZN",
@@ -70,7 +70,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:01.391225"
+      "timestamp": "2026-07-03T18:44:46.629947"
     },
     {
       "ticker": "ANET",
@@ -100,7 +100,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:01.511708"
+      "timestamp": "2026-07-03T18:44:46.728531"
     },
     {
       "ticker": "GOOG",
@@ -130,7 +130,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:01.636670"
+      "timestamp": "2026-07-03T18:44:46.870943"
     },
     {
       "ticker": "GOOGL",
@@ -160,7 +160,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:01.769675"
+      "timestamp": "2026-07-03T18:44:46.978919"
     },
     {
       "ticker": "IONQ",
@@ -190,7 +190,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-07-03T16:08:01.892268"
+      "timestamp": "2026-07-03T18:44:47.079668"
     },
     {
       "ticker": "META",
@@ -220,7 +220,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:02.025287"
+      "timestamp": "2026-07-03T18:44:47.214409"
     },
     {
       "ticker": "MU",
@@ -250,7 +250,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:02.237763"
+      "timestamp": "2026-07-03T18:44:47.385891"
     },
     {
       "ticker": "NET",
@@ -280,7 +280,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-07-03T16:08:02.346357"
+      "timestamp": "2026-07-03T18:44:47.484270"
     },
     {
       "ticker": "NVDA",
@@ -310,7 +310,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:02.495648"
+      "timestamp": "2026-07-03T18:44:47.625531"
     },
     {
       "ticker": "PLTR",
@@ -340,7 +340,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:02.615331"
+      "timestamp": "2026-07-03T18:44:47.728546"
     },
     {
       "ticker": "RGTI",
@@ -370,7 +370,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-07-03T16:08:02.795623"
+      "timestamp": "2026-07-03T18:44:47.830781"
     },
     {
       "ticker": "SMCI",
@@ -400,7 +400,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-07-03T16:08:02.915185"
+      "timestamp": "2026-07-03T18:44:47.932281"
     },
     {
       "ticker": "SNOW",
@@ -430,7 +430,7 @@
         "volume": 0.1,
         "stochastic": -0.5
       },
-      "timestamp": "2026-07-03T16:08:03.024006"
+      "timestamp": "2026-07-03T18:44:48.032410"
     },
     {
       "ticker": "STX",
@@ -460,7 +460,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:03.193638"
+      "timestamp": "2026-07-03T18:44:48.193735"
     },
     {
       "ticker": "SYM",
@@ -490,7 +490,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-07-03T16:08:03.323584"
+      "timestamp": "2026-07-03T18:44:48.304422"
     },
     {
       "ticker": "TSLA",
@@ -520,7 +520,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:03.435870"
+      "timestamp": "2026-07-03T18:44:48.403665"
     },
     {
       "ticker": "WDC",
@@ -550,7 +550,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:03.590224"
+      "timestamp": "2026-07-03T18:44:48.565621"
     },
     {
       "ticker": "COIN",
@@ -580,7 +580,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:03.713860"
+      "timestamp": "2026-07-03T18:44:48.705599"
     },
     {
       "ticker": "HOOD",
@@ -610,7 +610,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:03.836176"
+      "timestamp": "2026-07-03T18:44:48.824031"
     },
     {
       "ticker": "ISRG",
@@ -640,7 +640,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:03.969232"
+      "timestamp": "2026-07-03T18:44:48.932667"
     },
     {
       "ticker": "SOFI",
@@ -670,7 +670,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-07-03T16:08:04.090014"
+      "timestamp": "2026-07-03T18:44:49.033296"
     },
     {
       "ticker": "BEAM",
@@ -700,7 +700,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:04.275316"
+      "timestamp": "2026-07-03T18:44:49.134786"
     },
     {
       "ticker": "CRSP",
@@ -730,7 +730,7 @@
         "volume": 0.3,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:04.384643"
+      "timestamp": "2026-07-03T18:44:49.262867"
     },
     {
       "ticker": "DNA",
@@ -760,7 +760,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:04.494727"
+      "timestamp": "2026-07-03T18:44:49.360586"
     },
     {
       "ticker": "RXRX",
@@ -790,7 +790,7 @@
         "volume": 0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-07-03T16:08:04.635977"
+      "timestamp": "2026-07-03T18:44:49.465183"
     },
     {
       "ticker": "ASTS",
@@ -820,7 +820,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-07-03T16:08:04.748845"
+      "timestamp": "2026-07-03T18:44:49.564380"
     },
     {
       "ticker": "IRDM",
@@ -850,7 +850,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-07-03T16:08:04.877699"
+      "timestamp": "2026-07-03T18:44:49.686760"
     },
     {
       "ticker": "RKLB",
@@ -880,7 +880,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-07-03T16:08:04.988324"
+      "timestamp": "2026-07-03T18:44:49.786721"
     },
     {
       "ticker": "ENPH",
@@ -910,7 +910,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:05.117307"
+      "timestamp": "2026-07-03T18:44:49.886085"
     },
     {
       "ticker": "FSLR",
@@ -940,7 +940,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-07-03T16:08:05.236181"
+      "timestamp": "2026-07-03T18:44:50.045561"
     },
     {
       "ticker": "QS",
@@ -970,7 +970,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:05.345702"
+      "timestamp": "2026-07-03T18:44:50.176848"
     },
     {
       "ticker": "LEU",
@@ -1000,7 +1000,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-07-03T16:08:05.479705"
+      "timestamp": "2026-07-03T18:44:50.294054"
     }
   ],
   "summary": {
@@ -1047,7 +1047,7 @@
       "LEU"
     ]
   },
-  "generated_at": "2026-07-03T16:08:01.150219",
+  "generated_at": "2026-07-03T18:44:46.388318",
   "options": [
     {
       "ticker": "AMD",
@@ -1666,30 +1666,30 @@
       "current_price": 539.0,
       "signal": "HOLD",
       "target_price": 677.96,
-      "recommendation": "$27.5 CALL exp 2027-01-15 \u2192 Target $677.96",
+      "recommendation": "$25.0 CALL exp 2027-01-15 \u2192 Target $677.96",
       "options": [
         {
-          "strike": 27.5,
-          "bid": 104.85,
-          "ask": 108.95,
-          "mid_price": 106.9,
-          "last_price": 54.15,
-          "volume": 1,
-          "open_interest": 14,
+          "strike": 25.0,
+          "bid": 0,
+          "ask": 0,
+          "mid_price": 55.65,
+          "last_price": 55.65,
+          "volume": 3,
+          "open_interest": 8,
           "implied_volatility": 0.0,
           "delta": 0.8,
-          "intrinsic": 511.5,
-          "extrinsic": -404.6,
-          "moneyness": 94.9,
+          "intrinsic": 514.0,
+          "extrinsic": -458.35,
+          "moneyness": 95.4,
           "moneyness_label": "ITM",
-          "break_even": 134.4,
+          "break_even": 80.65,
           "target_price": 677.96,
-          "return_at_target": 508.5,
+          "return_at_target": 1073.3,
           "max_loss": -100,
-          "leverage": 4.0,
-          "daily_theta_pct": -1.941,
-          "liquidity_score": 0.2,
-          "risk_reward": 5.08,
+          "leverage": 7.7,
+          "daily_theta_pct": -4.224,
+          "liquidity_score": 0.4,
+          "risk_reward": 10.73,
           "expiry": "2027-01-15",
           "days_to_expiry": 195,
           "option_type": "CALL",
