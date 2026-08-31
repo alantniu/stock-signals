@@ -40,7 +40,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:47.875466"
+      "timestamp": "2026-08-31T23:43:11.291989"
     },
     {
       "ticker": "AMZN",
@@ -70,7 +70,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:48.033351"
+      "timestamp": "2026-08-31T23:43:11.405284"
     },
     {
       "ticker": "ANET",
@@ -100,7 +100,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:48.174135"
+      "timestamp": "2026-08-31T23:43:11.520525"
     },
     {
       "ticker": "GOOG",
@@ -130,7 +130,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:48.385722"
+      "timestamp": "2026-08-31T23:43:11.651780"
     },
     {
       "ticker": "GOOGL",
@@ -160,7 +160,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:48.544434"
+      "timestamp": "2026-08-31T23:43:11.772479"
     },
     {
       "ticker": "IONQ",
@@ -190,7 +190,7 @@
         "volume": 0.3,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:48.715007"
+      "timestamp": "2026-08-31T23:43:11.904003"
     },
     {
       "ticker": "META",
@@ -220,7 +220,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:48.882872"
+      "timestamp": "2026-08-31T23:43:12.033998"
     },
     {
       "ticker": "MU",
@@ -250,7 +250,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-08-31T21:57:49.081152"
+      "timestamp": "2026-08-31T23:43:12.238304"
     },
     {
       "ticker": "NET",
@@ -280,7 +280,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:49.239185"
+      "timestamp": "2026-08-31T23:43:12.357241"
     },
     {
       "ticker": "NVDA",
@@ -290,8 +290,8 @@
       "composite_score": 0.105,
       "current_price": 220.78,
       "daily_change": 1.48,
-      "buy_range": "$210.57 - $217.37",
-      "sell_range": "$224.18 - $234.4",
+      "buy_range": "$210.56 - $217.37",
+      "sell_range": "$224.19 - $234.4",
       "support": 207.25,
       "resistance": 230.47,
       "indicators": {
@@ -310,7 +310,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-08-31T21:57:49.459139"
+      "timestamp": "2026-08-31T23:43:12.511581"
     },
     {
       "ticker": "PLTR",
@@ -340,7 +340,7 @@
         "volume": -0.1,
         "stochastic": -0.5
       },
-      "timestamp": "2026-08-31T21:57:49.636954"
+      "timestamp": "2026-08-31T23:43:12.673137"
     },
     {
       "ticker": "RGTI",
@@ -370,7 +370,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:49.770172"
+      "timestamp": "2026-08-31T23:43:12.892612"
     },
     {
       "ticker": "SMCI",
@@ -400,7 +400,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:49.980979"
+      "timestamp": "2026-08-31T23:43:13.025152"
     },
     {
       "ticker": "SNOW",
@@ -430,7 +430,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:50.149318"
+      "timestamp": "2026-08-31T23:43:13.146813"
     },
     {
       "ticker": "STX",
@@ -460,7 +460,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:50.345559"
+      "timestamp": "2026-08-31T23:43:13.318664"
     },
     {
       "ticker": "SYM",
@@ -490,7 +490,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:51.018724"
+      "timestamp": "2026-08-31T23:43:13.495547"
     },
     {
       "ticker": "TSLA",
@@ -520,7 +520,7 @@
         "volume": 0.3,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:51.187490"
+      "timestamp": "2026-08-31T23:43:13.611180"
     },
     {
       "ticker": "WDC",
@@ -550,7 +550,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:51.407671"
+      "timestamp": "2026-08-31T23:43:13.815336"
     },
     {
       "ticker": "COIN",
@@ -580,7 +580,7 @@
         "volume": 0.1,
         "stochastic": -0.5
       },
-      "timestamp": "2026-08-31T21:57:51.568285"
+      "timestamp": "2026-08-31T23:43:13.932983"
     },
     {
       "ticker": "HOOD",
@@ -610,7 +610,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-08-31T21:57:51.769331"
+      "timestamp": "2026-08-31T23:43:14.063197"
     },
     {
       "ticker": "ISRG",
@@ -640,7 +640,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-08-31T21:57:51.897713"
+      "timestamp": "2026-08-31T23:43:14.193324"
     },
     {
       "ticker": "SOFI",
@@ -670,7 +670,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:52.065581"
+      "timestamp": "2026-08-31T23:43:14.332469"
     },
     {
       "ticker": "BEAM",
@@ -700,7 +700,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-08-31T21:57:52.226769"
+      "timestamp": "2026-08-31T23:43:14.452395"
     },
     {
       "ticker": "CRSP",
@@ -730,7 +730,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:52.387959"
+      "timestamp": "2026-08-31T23:43:14.572673"
     },
     {
       "ticker": "DNA",
@@ -760,7 +760,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:52.540076"
+      "timestamp": "2026-08-31T23:43:14.683304"
     },
     {
       "ticker": "RXRX",
@@ -790,7 +790,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:52.702078"
+      "timestamp": "2026-08-31T23:43:14.851728"
     },
     {
       "ticker": "ASTS",
@@ -820,7 +820,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:52.840927"
+      "timestamp": "2026-08-31T23:43:14.991568"
     },
     {
       "ticker": "IRDM",
@@ -850,7 +850,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:53.019889"
+      "timestamp": "2026-08-31T23:43:15.194278"
     },
     {
       "ticker": "RKLB",
@@ -880,7 +880,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:53.177430"
+      "timestamp": "2026-08-31T23:43:15.301806"
     },
     {
       "ticker": "ENPH",
@@ -910,7 +910,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:53.315834"
+      "timestamp": "2026-08-31T23:43:15.424464"
     },
     {
       "ticker": "FSLR",
@@ -940,7 +940,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:53.459554"
+      "timestamp": "2026-08-31T23:43:15.544212"
     },
     {
       "ticker": "QS",
@@ -970,7 +970,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-08-31T21:57:53.597016"
+      "timestamp": "2026-08-31T23:43:15.664530"
     },
     {
       "ticker": "LEU",
@@ -1000,7 +1000,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-08-31T21:57:53.764890"
+      "timestamp": "2026-08-31T23:43:15.859023"
     }
   ],
   "summary": {
@@ -1047,7 +1047,7 @@
     ],
     "strong_sell": []
   },
-  "generated_at": "2026-08-31T21:57:47.736339",
+  "generated_at": "2026-08-31T23:43:11.120384",
   "options": [
     {
       "ticker": "AMD",
