@@ -40,7 +40,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:54.669919"
+      "timestamp": "2026-11-02T23:57:22.667134"
     },
     {
       "ticker": "AMZN",
@@ -70,7 +70,7 @@
         "volume": 0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-02T22:51:54.811157"
+      "timestamp": "2026-11-02T23:57:22.806930"
     },
     {
       "ticker": "ANET",
@@ -100,7 +100,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:55.001705"
+      "timestamp": "2026-11-02T23:57:23.018584"
     },
     {
       "ticker": "GOOG",
@@ -130,7 +130,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:55.200364"
+      "timestamp": "2026-11-02T23:57:23.176618"
     },
     {
       "ticker": "GOOGL",
@@ -160,7 +160,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:55.340709"
+      "timestamp": "2026-11-02T23:57:23.358589"
     },
     {
       "ticker": "IONQ",
@@ -190,7 +190,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:55.482614"
+      "timestamp": "2026-11-02T23:57:23.555451"
     },
     {
       "ticker": "META",
@@ -220,7 +220,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:55.636318"
+      "timestamp": "2026-11-02T23:57:23.713072"
     },
     {
       "ticker": "MU",
@@ -250,7 +250,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:55.828476"
+      "timestamp": "2026-11-02T23:57:23.909203"
     },
     {
       "ticker": "NET",
@@ -280,7 +280,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:56.011347"
+      "timestamp": "2026-11-02T23:57:24.114940"
     },
     {
       "ticker": "NVDA",
@@ -310,7 +310,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:56.173249"
+      "timestamp": "2026-11-02T23:57:24.273758"
     },
     {
       "ticker": "PLTR",
@@ -340,7 +340,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:56.304776"
+      "timestamp": "2026-11-02T23:57:24.440104"
     },
     {
       "ticker": "RGTI",
@@ -370,7 +370,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:56.455122"
+      "timestamp": "2026-11-02T23:57:24.565169"
     },
     {
       "ticker": "SMCI",
@@ -400,7 +400,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:56.599506"
+      "timestamp": "2026-11-02T23:57:24.740678"
     },
     {
       "ticker": "SNOW",
@@ -430,7 +430,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:56.737931"
+      "timestamp": "2026-11-02T23:57:24.906115"
     },
     {
       "ticker": "STX",
@@ -460,7 +460,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:56.918110"
+      "timestamp": "2026-11-02T23:57:25.061305"
     },
     {
       "ticker": "SYM",
@@ -490,7 +490,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:57.068364"
+      "timestamp": "2026-11-02T23:57:25.198437"
     },
     {
       "ticker": "TSLA",
@@ -520,7 +520,7 @@
         "volume": 0.1,
         "stochastic": -0.5
       },
-      "timestamp": "2026-11-02T22:51:57.246364"
+      "timestamp": "2026-11-02T23:57:25.366177"
     },
     {
       "ticker": "WDC",
@@ -550,7 +550,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:57.408600"
+      "timestamp": "2026-11-02T23:57:25.512467"
     },
     {
       "ticker": "COIN",
@@ -580,7 +580,7 @@
         "volume": 0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:57.553015"
+      "timestamp": "2026-11-02T23:57:25.637516"
     },
     {
       "ticker": "HOOD",
@@ -610,7 +610,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:57.697740"
+      "timestamp": "2026-11-02T23:57:25.772634"
     },
     {
       "ticker": "ISRG",
@@ -640,7 +640,7 @@
         "volume": 0.3,
         "stochastic": -0.2
       },
-      "timestamp": "2026-11-02T22:51:57.827848"
+      "timestamp": "2026-11-02T23:57:25.907968"
     },
     {
       "ticker": "SOFI",
@@ -670,7 +670,7 @@
         "volume": -0.1,
         "stochastic": -0.2
       },
-      "timestamp": "2026-11-02T22:51:57.966955"
+      "timestamp": "2026-11-02T23:57:26.034480"
     },
     {
       "ticker": "BEAM",
@@ -700,7 +700,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:58.108488"
+      "timestamp": "2026-11-02T23:57:26.171166"
     },
     {
       "ticker": "CRSP",
@@ -730,7 +730,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:58.259171"
+      "timestamp": "2026-11-02T23:57:26.311448"
     },
     {
       "ticker": "DNA",
@@ -742,7 +742,7 @@
       "daily_change": -12.13,
       "buy_range": "$8.03 - $9.24",
       "sell_range": "$10.46 - $12.27",
-      "support": 9.3,
+      "support": 9.28,
       "resistance": 18.22,
       "indicators": {
         "rsi": 40.3,
@@ -750,7 +750,7 @@
         "bb_position": 21.2,
         "vs_sma50": 2.65,
         "volume_ratio": 1.07,
-        "stoch_k": 11.9
+        "stoch_k": 12.1
       },
       "individual_scores": {
         "rsi": 0.0,
@@ -760,7 +760,7 @@
         "volume": 0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:58.409939"
+      "timestamp": "2026-11-02T23:57:26.436711"
     },
     {
       "ticker": "RXRX",
@@ -790,7 +790,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:58.554036"
+      "timestamp": "2026-11-02T23:57:26.574997"
     },
     {
       "ticker": "ASTS",
@@ -820,7 +820,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:58.700285"
+      "timestamp": "2026-11-02T23:57:26.737287"
     },
     {
       "ticker": "IRDM",
@@ -850,7 +850,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:58.851664"
+      "timestamp": "2026-11-02T23:57:26.892549"
     },
     {
       "ticker": "RKLB",
@@ -880,7 +880,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:58.992207"
+      "timestamp": "2026-11-02T23:57:27.078171"
     },
     {
       "ticker": "ENPH",
@@ -910,7 +910,7 @@
         "volume": 0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-02T22:51:59.136635"
+      "timestamp": "2026-11-02T23:57:27.233436"
     },
     {
       "ticker": "FSLR",
@@ -940,7 +940,7 @@
         "volume": 0.3,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:59.338886"
+      "timestamp": "2026-11-02T23:57:27.388935"
     },
     {
       "ticker": "QS",
@@ -970,7 +970,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-02T22:51:59.476700"
+      "timestamp": "2026-11-02T23:57:27.547184"
     },
     {
       "ticker": "LEU",
@@ -1000,7 +1000,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-02T22:51:59.626907"
+      "timestamp": "2026-11-02T23:57:27.727289"
     }
   ],
   "summary": {
@@ -1046,7 +1046,7 @@
     ],
     "strong_sell": []
   },
-  "generated_at": "2026-11-02T22:51:54.524409",
+  "generated_at": "2026-11-02T23:57:22.541686",
   "options": [
     {
       "ticker": "AMD",
@@ -1341,34 +1341,34 @@
       "current_price": 265.17,
       "signal": "HOLD",
       "target_price": 307.31,
-      "recommendation": "$115.0 CALL exp 2027-09-17 \u2192 Target $307.31",
+      "recommendation": "$195.0 CALL exp 2027-09-17 \u2192 Target $307.31",
       "options": [
         {
-          "strike": 115.0,
-          "bid": 105.5,
-          "ask": 110.5,
-          "mid_price": 108.0,
-          "last_price": 116.18,
-          "volume": 0,
+          "strike": 195.0,
+          "bid": 0,
+          "ask": 0,
+          "mid_price": 69.92,
+          "last_price": 69.92,
+          "volume": 1,
           "open_interest": 0,
           "implied_volatility": 0.0,
           "delta": 0.8,
-          "intrinsic": 150.17,
-          "extrinsic": -42.17,
-          "moneyness": 56.6,
+          "intrinsic": 70.17,
+          "extrinsic": -0.25,
+          "moneyness": 26.5,
           "moneyness_label": "ITM",
-          "break_even": 223.0,
+          "break_even": 264.92,
           "target_price": 307.31,
-          "return_at_target": 78.1,
+          "return_at_target": 60.6,
           "max_loss": -100,
-          "leverage": 2.0,
-          "daily_theta_pct": -0.123,
-          "liquidity_score": 0.0,
-          "risk_reward": 0.78,
+          "leverage": 3.0,
+          "daily_theta_pct": -0.001,
+          "liquidity_score": 0.1,
+          "risk_reward": 0.61,
           "expiry": "2027-09-17",
           "days_to_expiry": 318,
           "option_type": "CALL",
-          "score": 39.5
+          "score": 40.1
         }
       ]
     },
@@ -1521,34 +1521,34 @@
       "current_price": 290.68,
       "signal": "HOLD",
       "target_price": 327.61,
-      "recommendation": "$280.0 CALL exp 2027-09-17 \u2192 Target $327.61",
+      "recommendation": "$145.0 CALL exp 2027-09-17 \u2192 Target $327.61",
       "options": [
         {
-          "strike": 280.0,
-          "bid": 72.1,
-          "ask": 76.65,
-          "mid_price": 74.38,
-          "last_price": 79.7,
-          "volume": 5,
-          "open_interest": 847,
-          "implied_volatility": 65.7,
-          "delta": 0.55,
-          "intrinsic": 10.68,
-          "extrinsic": 63.69,
-          "moneyness": 3.7,
+          "strike": 145.0,
+          "bid": 0,
+          "ask": 0,
+          "mid_price": 116.9,
+          "last_price": 116.9,
+          "volume": 71,
+          "open_interest": 0,
+          "implied_volatility": 0.0,
+          "delta": 0.8,
+          "intrinsic": 145.68,
+          "extrinsic": -28.78,
+          "moneyness": 50.1,
           "moneyness_label": "ITM",
-          "break_even": 354.38,
+          "break_even": 261.9,
           "target_price": 327.61,
-          "return_at_target": -36.0,
+          "return_at_target": 56.2,
           "max_loss": -100,
-          "leverage": 2.1,
-          "daily_theta_pct": 0.269,
-          "liquidity_score": 9.0,
-          "risk_reward": 0,
+          "leverage": 2.0,
+          "daily_theta_pct": -0.077,
+          "liquidity_score": 7.1,
+          "risk_reward": 0.56,
           "expiry": "2027-09-17",
           "days_to_expiry": 318,
           "option_type": "CALL",
-          "score": 32
+          "score": 35.0
         }
       ]
     },
