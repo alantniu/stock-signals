@@ -40,7 +40,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:16.849315"
+      "timestamp": "2026-11-28T00:36:12.475222"
     },
     {
       "ticker": "AMZN",
@@ -70,7 +70,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:16.965439"
+      "timestamp": "2026-11-28T00:36:12.795019"
     },
     {
       "ticker": "ANET",
@@ -100,7 +100,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:17.085609"
+      "timestamp": "2026-11-28T00:36:12.911259"
     },
     {
       "ticker": "GOOG",
@@ -130,7 +130,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:17.234724"
+      "timestamp": "2026-11-28T00:36:13.043970"
     },
     {
       "ticker": "GOOGL",
@@ -160,7 +160,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:17.358934"
+      "timestamp": "2026-11-28T00:36:13.169500"
     },
     {
       "ticker": "IONQ",
@@ -190,7 +190,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:17.488323"
+      "timestamp": "2026-11-28T00:36:13.314349"
     },
     {
       "ticker": "META",
@@ -220,7 +220,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:17.621537"
+      "timestamp": "2026-11-28T00:36:13.438735"
     },
     {
       "ticker": "MU",
@@ -250,7 +250,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:17.779089"
+      "timestamp": "2026-11-28T00:36:13.618400"
     },
     {
       "ticker": "NET",
@@ -280,7 +280,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:17.897905"
+      "timestamp": "2026-11-28T00:36:13.775966"
     },
     {
       "ticker": "NVDA",
@@ -310,7 +310,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:18.054502"
+      "timestamp": "2026-11-28T00:36:13.925901"
     },
     {
       "ticker": "PLTR",
@@ -340,7 +340,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:18.174082"
+      "timestamp": "2026-11-28T00:36:14.037511"
     },
     {
       "ticker": "RGTI",
@@ -370,7 +370,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:18.324009"
+      "timestamp": "2026-11-28T00:36:14.157767"
     },
     {
       "ticker": "SMCI",
@@ -400,7 +400,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:18.450081"
+      "timestamp": "2026-11-28T00:36:14.282856"
     },
     {
       "ticker": "SNOW",
@@ -430,7 +430,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:18.572928"
+      "timestamp": "2026-11-28T00:36:14.393245"
     },
     {
       "ticker": "STX",
@@ -460,7 +460,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:18.760199"
+      "timestamp": "2026-11-28T00:36:14.615371"
     },
     {
       "ticker": "SYM",
@@ -490,7 +490,7 @@
         "volume": -0.1,
         "stochastic": -0.5
       },
-      "timestamp": "2026-11-27T22:53:18.898245"
+      "timestamp": "2026-11-28T00:36:14.742617"
     },
     {
       "ticker": "TSLA",
@@ -520,7 +520,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:19.076351"
+      "timestamp": "2026-11-28T00:36:14.869531"
     },
     {
       "ticker": "WDC",
@@ -550,7 +550,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:19.224569"
+      "timestamp": "2026-11-28T00:36:15.026435"
     },
     {
       "ticker": "COIN",
@@ -580,7 +580,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:19.364261"
+      "timestamp": "2026-11-28T00:36:15.173326"
     },
     {
       "ticker": "HOOD",
@@ -610,7 +610,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:19.516027"
+      "timestamp": "2026-11-28T00:36:15.298741"
     },
     {
       "ticker": "ISRG",
@@ -640,7 +640,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:19.643925"
+      "timestamp": "2026-11-28T00:36:15.426195"
     },
     {
       "ticker": "SOFI",
@@ -670,7 +670,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:19.776564"
+      "timestamp": "2026-11-28T00:36:15.562515"
     },
     {
       "ticker": "BEAM",
@@ -700,7 +700,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:19.900185"
+      "timestamp": "2026-11-28T00:36:15.695225"
     },
     {
       "ticker": "CRSP",
@@ -730,7 +730,7 @@
         "volume": -0.1,
         "stochastic": 0.0
       },
-      "timestamp": "2026-11-27T22:53:20.031342"
+      "timestamp": "2026-11-28T00:36:15.822909"
     },
     {
       "ticker": "DNA",
@@ -760,7 +760,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-27T22:53:20.162686"
+      "timestamp": "2026-11-28T00:36:15.974137"
     },
     {
       "ticker": "RXRX",
@@ -790,7 +790,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:20.361784"
+      "timestamp": "2026-11-28T00:36:16.114349"
     },
     {
       "ticker": "ASTS",
@@ -820,7 +820,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:20.495057"
+      "timestamp": "2026-11-28T00:36:16.229955"
     },
     {
       "ticker": "IRDM",
@@ -850,7 +850,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:20.633825"
+      "timestamp": "2026-11-28T00:36:16.388254"
     },
     {
       "ticker": "RKLB",
@@ -880,7 +880,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:20.778062"
+      "timestamp": "2026-11-28T00:36:16.505067"
     },
     {
       "ticker": "ENPH",
@@ -910,7 +910,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:20.908361"
+      "timestamp": "2026-11-28T00:36:16.629718"
     },
     {
       "ticker": "FSLR",
@@ -940,7 +940,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:21.062413"
+      "timestamp": "2026-11-28T00:36:16.775514"
     },
     {
       "ticker": "QS",
@@ -970,7 +970,7 @@
         "volume": -0.1,
         "stochastic": 0.5
       },
-      "timestamp": "2026-11-27T22:53:21.224377"
+      "timestamp": "2026-11-28T00:36:16.894293"
     },
     {
       "ticker": "LEU",
@@ -1000,7 +1000,7 @@
         "volume": -0.1,
         "stochastic": 0.2
       },
-      "timestamp": "2026-11-27T22:53:21.360530"
+      "timestamp": "2026-11-28T00:36:17.044292"
     }
   ],
   "summary": {
@@ -1044,7 +1044,7 @@
     "sell": [],
     "strong_sell": []
   },
-  "generated_at": "2026-11-27T22:53:16.725329",
+  "generated_at": "2026-11-28T00:36:12.351558",
   "options": [
     {
       "ticker": "AMD",
@@ -1072,11 +1072,11 @@
           "return_at_target": 207.6,
           "max_loss": -100,
           "leverage": 2.3,
-          "daily_theta_pct": -0.471,
+          "daily_theta_pct": -0.472,
           "liquidity_score": 0.2,
           "risk_reward": 2.08,
           "expiry": "2027-09-17",
-          "days_to_expiry": 293,
+          "days_to_expiry": 292,
           "option_type": "CALL",
           "score": 70
         }
@@ -1097,7 +1097,7 @@
           "last_price": 34.25,
           "volume": 54,
           "open_interest": 8519,
-          "implied_volatility": 44.7,
+          "implied_volatility": 44.8,
           "delta": 0.55,
           "intrinsic": 4.12,
           "extrinsic": 30.68,
@@ -1108,11 +1108,11 @@
           "return_at_target": -25.9,
           "max_loss": -100,
           "leverage": 4.0,
-          "daily_theta_pct": 0.439,
+          "daily_theta_pct": 0.441,
           "liquidity_score": 90.6,
           "risk_reward": 0,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 43
         }
@@ -1133,7 +1133,7 @@
           "last_price": 21.75,
           "volume": 76,
           "open_interest": 425,
-          "implied_volatility": 61.6,
+          "implied_volatility": 61.7,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 26.02,
@@ -1144,11 +1144,11 @@
           "return_at_target": -47.1,
           "max_loss": -100,
           "leverage": 3.0,
-          "daily_theta_pct": 0.498,
+          "daily_theta_pct": 0.5,
           "liquidity_score": 11.8,
           "risk_reward": 0,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 32
         }
@@ -1169,7 +1169,7 @@
           "last_price": 35.75,
           "volume": 55,
           "open_interest": 869,
-          "implied_volatility": 44.5,
+          "implied_volatility": 44.6,
           "delta": 0.55,
           "intrinsic": 2.44,
           "extrinsic": 33.58,
@@ -1180,11 +1180,11 @@
           "return_at_target": -30.9,
           "max_loss": -100,
           "leverage": 4.2,
-          "daily_theta_pct": 0.464,
+          "daily_theta_pct": 0.466,
           "liquidity_score": 14.2,
           "risk_reward": 0,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 39
         }
@@ -1216,11 +1216,11 @@
           "return_at_target": 137.9,
           "max_loss": -100,
           "leverage": 2.1,
-          "daily_theta_pct": -0.572,
+          "daily_theta_pct": -0.575,
           "liquidity_score": 0.0,
           "risk_reward": 1.38,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 49.5
         }
@@ -1256,7 +1256,7 @@
           "liquidity_score": 2.4,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 30
         }
@@ -1288,11 +1288,11 @@
           "return_at_target": -100.0,
           "max_loss": -100,
           "leverage": 3.4,
-          "daily_theta_pct": 0.341,
+          "daily_theta_pct": 0.342,
           "liquidity_score": 38.6,
           "risk_reward": 0,
           "expiry": "2027-09-17",
-          "days_to_expiry": 293,
+          "days_to_expiry": 292,
           "option_type": "CALL",
           "score": 41
         }
@@ -1324,11 +1324,11 @@
           "return_at_target": 323.9,
           "max_loss": -100,
           "leverage": 3.0,
-          "daily_theta_pct": -0.577,
+          "daily_theta_pct": -0.579,
           "liquidity_score": 0.1,
           "risk_reward": 3.24,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 75
         }
@@ -1364,7 +1364,7 @@
           "liquidity_score": 0.1,
           "risk_reward": 1.07,
           "expiry": "2027-09-17",
-          "days_to_expiry": 293,
+          "days_to_expiry": 292,
           "option_type": "CALL",
           "score": 51.8
         }
@@ -1385,7 +1385,7 @@
           "last_price": 25.1,
           "volume": 1003,
           "open_interest": 15172,
-          "implied_volatility": 55.7,
+          "implied_volatility": 55.8,
           "delta": 0.55,
           "intrinsic": 0.49,
           "extrinsic": 24.46,
@@ -1396,11 +1396,11 @@
           "return_at_target": 25.1,
           "max_loss": -100,
           "leverage": 3.3,
-          "daily_theta_pct": 0.488,
+          "daily_theta_pct": 0.49,
           "liquidity_score": 100,
           "risk_reward": 0.25,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 42.3
         }
@@ -1421,7 +1421,7 @@
           "last_price": 25.55,
           "volume": 16,
           "open_interest": 3787,
-          "implied_volatility": 59.9,
+          "implied_volatility": 60.0,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 25.55,
@@ -1432,11 +1432,11 @@
           "return_at_target": -77.8,
           "max_loss": -100,
           "leverage": 3.0,
-          "daily_theta_pct": 0.498,
+          "daily_theta_pct": 0.5,
           "liquidity_score": 39.5,
           "risk_reward": 0,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 34
         }
@@ -1457,7 +1457,7 @@
           "last_price": 2.0,
           "volume": 1,
           "open_interest": 1064,
-          "implied_volatility": 90.6,
+          "implied_volatility": 90.8,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 2.09,
@@ -1468,11 +1468,11 @@
           "return_at_target": -23.9,
           "max_loss": -100,
           "leverage": 1.8,
-          "daily_theta_pct": 0.498,
+          "daily_theta_pct": 0.5,
           "liquidity_score": 10.7,
           "risk_reward": 0,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 26
         }
@@ -1493,7 +1493,7 @@
           "last_price": 8.04,
           "volume": 7,
           "open_interest": 898,
-          "implied_volatility": 89.4,
+          "implied_volatility": 89.5,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 8.03,
@@ -1504,11 +1504,11 @@
           "return_at_target": -54.5,
           "max_loss": -100,
           "leverage": 1.3,
-          "daily_theta_pct": 0.26,
+          "daily_theta_pct": 0.261,
           "liquidity_score": 9.7,
           "risk_reward": 0,
           "expiry": "2027-12-17",
-          "days_to_expiry": 384,
+          "days_to_expiry": 383,
           "option_type": "CALL",
           "score": 31
         }
@@ -1529,7 +1529,7 @@
           "last_price": 54.9,
           "volume": 2,
           "open_interest": 852,
-          "implied_volatility": 64.7,
+          "implied_volatility": 64.8,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 61.77,
@@ -1540,11 +1540,11 @@
           "return_at_target": -53.8,
           "max_loss": -100,
           "leverage": 2.0,
-          "daily_theta_pct": 0.341,
+          "daily_theta_pct": 0.342,
           "liquidity_score": 8.7,
           "risk_reward": 0,
           "expiry": "2027-09-17",
-          "days_to_expiry": 293,
+          "days_to_expiry": 292,
           "option_type": "CALL",
           "score": 32
         }
@@ -1576,11 +1576,11 @@
           "return_at_target": 122.6,
           "max_loss": -100,
           "leverage": 2.1,
-          "daily_theta_pct": -0.367,
+          "daily_theta_pct": -0.369,
           "liquidity_score": 4.6,
           "risk_reward": 1.23,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 45.6
         }
@@ -1601,7 +1601,7 @@
           "last_price": 10.9,
           "volume": 10,
           "open_interest": 518,
-          "implied_volatility": 72.9,
+          "implied_volatility": 73.0,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 11.35,
@@ -1616,7 +1616,7 @@
           "liquidity_score": 6.2,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 31
         }
@@ -1637,7 +1637,7 @@
           "last_price": 46.45,
           "volume": 62,
           "open_interest": 211,
-          "implied_volatility": 50.3,
+          "implied_volatility": 50.5,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 45.2,
@@ -1648,11 +1648,11 @@
           "return_at_target": -88.4,
           "max_loss": -100,
           "leverage": 4.0,
-          "daily_theta_pct": 0.498,
+          "daily_theta_pct": 0.5,
           "liquidity_score": 8.3,
           "risk_reward": 0,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 37
         }
@@ -1673,7 +1673,7 @@
           "last_price": 81.15,
           "volume": 147,
           "open_interest": 0,
-          "implied_volatility": 75.8,
+          "implied_volatility": 75.9,
           "delta": 0.55,
           "intrinsic": 2.11,
           "extrinsic": 87.24,
@@ -1684,11 +1684,11 @@
           "return_at_target": -38.3,
           "max_loss": -100,
           "leverage": 1.8,
-          "daily_theta_pct": 0.254,
+          "daily_theta_pct": 0.255,
           "liquidity_score": 14.7,
           "risk_reward": 0,
           "expiry": "2027-12-17",
-          "days_to_expiry": 384,
+          "days_to_expiry": 383,
           "option_type": "CALL",
           "score": 31
         }
@@ -1709,7 +1709,7 @@
           "last_price": 36.5,
           "volume": 10,
           "open_interest": 461,
-          "implied_volatility": 79.5,
+          "implied_volatility": 79.6,
           "delta": 0.55,
           "intrinsic": 2.04,
           "extrinsic": 34.03,
@@ -1720,11 +1720,11 @@
           "return_at_target": -52.8,
           "max_loss": -100,
           "leverage": 1.6,
-          "daily_theta_pct": 0.225,
+          "daily_theta_pct": 0.226,
           "liquidity_score": 5.6,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 31
         }
@@ -1745,7 +1745,7 @@
           "last_price": 21.0,
           "volume": 19,
           "open_interest": 1892,
-          "implied_volatility": 74.4,
+          "implied_volatility": 74.5,
           "delta": 0.55,
           "intrinsic": 2.92,
           "extrinsic": 18.38,
@@ -1760,7 +1760,7 @@
           "liquidity_score": 20.8,
           "risk_reward": 0,
           "expiry": "2027-12-17",
-          "days_to_expiry": 384,
+          "days_to_expiry": 383,
           "option_type": "CALL",
           "score": 33
         }
@@ -1796,7 +1796,7 @@
           "liquidity_score": 0.0,
           "risk_reward": 0.63,
           "expiry": "2027-09-17",
-          "days_to_expiry": 293,
+          "days_to_expiry": 292,
           "option_type": "CALL",
           "score": 45.8
         }
@@ -1828,11 +1828,11 @@
           "return_at_target": -47.8,
           "max_loss": -100,
           "leverage": 1.9,
-          "daily_theta_pct": 0.215,
+          "daily_theta_pct": 0.216,
           "liquidity_score": 88.0,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 36
         }
@@ -1853,7 +1853,7 @@
           "last_price": 7.0,
           "volume": 1,
           "open_interest": 0,
-          "implied_volatility": 78.1,
+          "implied_volatility": 78.2,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 7.5,
@@ -1868,7 +1868,7 @@
           "liquidity_score": 0.1,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 30
         }
@@ -1889,7 +1889,7 @@
           "last_price": 12.0,
           "volume": 4,
           "open_interest": 52,
-          "implied_volatility": 58.8,
+          "implied_volatility": 58.9,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 10.45,
@@ -1904,7 +1904,7 @@
           "liquidity_score": 0.9,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 31
         }
@@ -1925,7 +1925,7 @@
           "last_price": 3.1,
           "volume": 12,
           "open_interest": 0,
-          "implied_volatility": 1.6,
+          "implied_volatility": 3.1,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 3.1,
@@ -1936,11 +1936,11 @@
           "return_at_target": -49.7,
           "max_loss": -100,
           "leverage": 1.1,
-          "daily_theta_pct": 0.281,
+          "daily_theta_pct": 0.282,
           "liquidity_score": 1.2,
           "risk_reward": 0,
           "expiry": "2027-11-19",
-          "days_to_expiry": 356,
+          "days_to_expiry": 355,
           "option_type": "CALL",
           "score": 35
         }
@@ -1972,11 +1972,11 @@
           "return_at_target": 30.1,
           "max_loss": -100,
           "leverage": 2.4,
-          "daily_theta_pct": 0.328,
+          "daily_theta_pct": 0.329,
           "liquidity_score": 6.3,
           "risk_reward": 0.3,
           "expiry": "2027-06-17",
-          "days_to_expiry": 201,
+          "days_to_expiry": 200,
           "option_type": "CALL",
           "score": 29.5
         }
@@ -1997,7 +1997,7 @@
           "last_price": 8.5,
           "volume": 5,
           "open_interest": 389,
-          "implied_volatility": 110.2,
+          "implied_volatility": 110.3,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 11.48,
@@ -2008,11 +2008,11 @@
           "return_at_target": -40.5,
           "max_loss": -100,
           "leverage": 1.1,
-          "daily_theta_pct": 0.26,
+          "daily_theta_pct": 0.261,
           "liquidity_score": 4.4,
           "risk_reward": 0,
           "expiry": "2027-12-17",
-          "days_to_expiry": 384,
+          "days_to_expiry": 383,
           "option_type": "CALL",
           "score": 30
         }
@@ -2033,7 +2033,7 @@
           "last_price": 7.22,
           "volume": 5,
           "open_interest": 34,
-          "implied_volatility": 47.1,
+          "implied_volatility": 47.2,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 6.05,
@@ -2044,11 +2044,11 @@
           "return_at_target": -64.8,
           "max_loss": -100,
           "leverage": 3.3,
-          "daily_theta_pct": 0.26,
+          "daily_theta_pct": 0.261,
           "liquidity_score": 0.8,
           "risk_reward": 0,
           "expiry": "2027-12-17",
-          "days_to_expiry": 384,
+          "days_to_expiry": 383,
           "option_type": "CALL",
           "score": 38
         }
@@ -2069,7 +2069,7 @@
           "last_price": 17.9,
           "volume": 30,
           "open_interest": 5537,
-          "implied_volatility": 83.9,
+          "implied_volatility": 84.0,
           "delta": 0.55,
           "intrinsic": 0.88,
           "extrinsic": 17.1,
@@ -2080,11 +2080,11 @@
           "return_at_target": -34.5,
           "max_loss": -100,
           "leverage": 1.6,
-          "daily_theta_pct": 0.227,
+          "daily_theta_pct": 0.228,
           "liquidity_score": 58.4,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 35
         }
@@ -2105,7 +2105,7 @@
           "last_price": 6.4,
           "volume": 1,
           "open_interest": 0,
-          "implied_volatility": 84.2,
+          "implied_volatility": 84.3,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 7.0,
@@ -2116,11 +2116,11 @@
           "return_at_target": -62.4,
           "max_loss": -100,
           "leverage": 1.4,
-          "daily_theta_pct": 0.26,
+          "daily_theta_pct": 0.261,
           "liquidity_score": 0.1,
           "risk_reward": 0,
           "expiry": "2027-12-17",
-          "days_to_expiry": 384,
+          "days_to_expiry": 383,
           "option_type": "CALL",
           "score": 30
         }
@@ -2141,7 +2141,7 @@
           "last_price": 30.81,
           "volume": 366,
           "open_interest": 0,
-          "implied_volatility": 62.2,
+          "implied_volatility": 62.3,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 32.9,
@@ -2152,11 +2152,11 @@
           "return_at_target": -42.6,
           "max_loss": -100,
           "leverage": 2.0,
-          "daily_theta_pct": 0.341,
+          "daily_theta_pct": 0.342,
           "liquidity_score": 36.6,
           "risk_reward": 0,
           "expiry": "2027-09-17",
-          "days_to_expiry": 293,
+          "days_to_expiry": 292,
           "option_type": "CALL",
           "score": 34
         }
@@ -2177,7 +2177,7 @@
           "last_price": 1.1,
           "volume": 21,
           "open_interest": 2127,
-          "implied_volatility": 91.0,
+          "implied_volatility": 91.1,
           "delta": 0.45,
           "intrinsic": 0,
           "extrinsic": 1.12,
@@ -2192,7 +2192,7 @@
           "liquidity_score": 23.4,
           "risk_reward": 0,
           "expiry": "2028-01-21",
-          "days_to_expiry": 419,
+          "days_to_expiry": 418,
           "option_type": "CALL",
           "score": 33
         }
@@ -2213,7 +2213,7 @@
           "last_price": 29.4,
           "volume": 1,
           "open_interest": 0,
-          "implied_volatility": 90.3,
+          "implied_volatility": 90.5,
           "delta": 0.55,
           "intrinsic": 0.43,
           "extrinsic": 30.27,
@@ -2228,7 +2228,7 @@
           "liquidity_score": 0.1,
           "risk_reward": 0,
           "expiry": "2027-12-17",
-          "days_to_expiry": 384,
+          "days_to_expiry": 383,
           "option_type": "CALL",
           "score": 30
         }
